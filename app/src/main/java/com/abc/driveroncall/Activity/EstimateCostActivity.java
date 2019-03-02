@@ -4,11 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,7 @@ import retrofit2.Response;
 
 public class EstimateCostActivity extends AppCompatActivity {
 
-    EditText enterHour;
+    TextView tv_type_select;
     Button calculate;
     TextView estimateAmount, place1, place2, estimateText;
     String hrBasedCost;
@@ -39,13 +42,15 @@ public class EstimateCostActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String date = "";
     String time = "";
+    String type = "";
+    String hourday = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estimate_cost);
-        enterHour = findViewById(R.id.enterHour);
+        tv_type_select = findViewById(R.id.tv_type_select);
         calculate = findViewById(R.id.calculate);
         estimateAmount = findViewById(R.id.estimateAmount);
         place1 = findViewById(R.id.place1);
@@ -58,28 +63,162 @@ public class EstimateCostActivity extends AppCompatActivity {
         place1.setText(Common.placeName1);
         place2.setText(Common.placeName2);
         Intent intent = getIntent();
-        date = intent.getStringExtra("date");
-        time = intent.getStringExtra("time");
+        date = Common.date;
+        time = Common.time;
 
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.setMessage("Data is Updating...");
-                dialog.show();
-                getCostingCall(enterHour.getText().toString());
+
+
+
+
+        if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
+
+            if (Common.indayorhour.equalsIgnoreCase("1")) {
+
+                tv_type_select.setText("Days");
+
+                list.add("1");
+                list.add("1.5");
+                list.add("2");
+                list.add("2.5");
+                list.add("3");
+                list.add("3.5");
+                list.add("4");
+                list.add("4.5");
+                list.add("5");
+                list.add("5.5");
+                list.add("6");
+                list.add("6.5");
+                list.add("7");
+
+                addAdepter = new NumAddAdepter(EstimateCostActivity.this, list);
+                recyclerView.setLayoutManager(new LinearLayoutManager(EstimateCostActivity.this, LinearLayout.HORIZONTAL, false));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(addAdepter);
+
+                addAdepter.SetupInterface(new NumAddAdepter.NumClick() {
+                    @Override
+                    public void click(String data, int pos) {
+
+
+                        getCostingCall(data);
+                        hourday = data;
+
+                    }
+                });
+
+
+
+            } else if (Common.indayorhour.equalsIgnoreCase("2")) {
+
+                list.add("1");
+                list.add("2");
+                list.add("3");
+                list.add("4");
+                list.add("5");
+                list.add("6");
+                list.add("7");
+                list.add("8");
+                list.add("9");
+                list.add("10");
+                list.add("11");
+                list.add("12");
+                list.add("13");
+                list.add("14");
+                list.add("15");
+                list.add("16");
+                list.add("17");
+                list.add("18");
+                list.add("19");
+                list.add("20");
+                list.add("21");
+                list.add("22");
+                list.add("23");
+                list.add("24");
+
+                tv_type_select.setText("Hours");
+
+                addAdepter = new NumAddAdepter(EstimateCostActivity.this, list);
+                recyclerView.setLayoutManager(new LinearLayoutManager(EstimateCostActivity.this, LinearLayout.HORIZONTAL, false));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(addAdepter);
+
+                addAdepter.SetupInterface(new NumAddAdepter.NumClick() {
+                    @Override
+                    public void click(String data, int pos) {
+                        getCostingCall(data);
+                        hourday = data;
+
+                    }
+                });
 
 
             }
+
+        }else {
+
+            list.add("1");
+            list.add("2");
+            list.add("3");
+            list.add("4");
+            list.add("5");
+            list.add("6");
+            list.add("7");
+            list.add("8");
+            list.add("9");
+            list.add("10");
+            list.add("11");
+            list.add("12");
+            list.add("13");
+            list.add("14");
+            list.add("15");
+            list.add("16");
+            list.add("17");
+            list.add("18");
+            list.add("19");
+            list.add("20");
+            list.add("21");
+            list.add("22");
+            list.add("23");
+            list.add("24");
+
+
+            tv_type_select.setText("Hours");
+
+            addAdepter = new NumAddAdepter(EstimateCostActivity.this, list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(EstimateCostActivity.this, LinearLayout.HORIZONTAL, false));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(addAdepter);
+
+            addAdepter.SetupInterface(new NumAddAdepter.NumClick() {
+                @Override
+                public void click(String data, int pos) {
+                    getCostingCall(data);
+                    hourday = data;
+
+                }
+            });
+
+
+        }
+
+        type  = Common.oneOrTwoWay;
+
+
+
+
+
+       /* calculate.setOnClickListener(v -> {
+            dialog.setMessage("Data is Updating...");
+            dialog.show();
+
+
+
         });
-
-        btn_book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                driverCall(date, time);
-
-            }
-        });
+*/
+        btn_book.setOnClickListener(v -> driverCall(date, time,hourday,type));
 
 
         //numAdepter();
@@ -130,7 +269,7 @@ public class EstimateCostActivity extends AppCompatActivity {
     }
 
 
-    public void driverCall(String date, String time) {
+    public void driverCall(String date, String time,String strhour,String type) {
         Log.e("MYDATA", "date === " + date);
         Log.e("MYDATA", " time === " + time);
         Log.e("MYDATA", " Common.myLatLong.latitude === " + Common.myLatLong.latitude);
@@ -139,9 +278,9 @@ public class EstimateCostActivity extends AppCompatActivity {
         Log.e("MYDATA", " Common.myLatLong2.longitude === " + Common.myLatLong2.longitude);
         Log.e("MYDATA", " Common.myLatLong2.longitude === " + Common.myLatLong2.longitude);
         Log.e("MYDATA", " Common.placeName2 === " + Common.placeName2);
-        Log.e("MYDATA", " enterHour.getText().toString() === " + enterHour.getText().toString());
+        Log.e("MYDATA", " enterHour.getText().toString() === " + strhour);
         final ApiInterface api = ApiClient.getApiService();
-        Call<CreateTripResponse> call = api.AddTrip("1", "15-1-2019", "7:30", "1", Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, "Bhopal", Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, "1Bhopal", enterHour.getText().toString());
+        Call<CreateTripResponse> call = api.AddTrip("1", "15-1-2019", "7:30", "1", Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, "Bhopal", Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, "1Bhopal", strhour);
         call.enqueue(new Callback<CreateTripResponse>() {
             @Override
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {

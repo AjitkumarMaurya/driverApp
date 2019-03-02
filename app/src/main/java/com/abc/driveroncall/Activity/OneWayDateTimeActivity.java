@@ -2,25 +2,30 @@ package com.abc.driveroncall.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.abc.driveroncall.FetchURL;
 import com.abc.driveroncall.R;
 import com.abc.driveroncall.common.Common;
@@ -42,7 +47,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
     TextView place1, place2;
     private GoogleMap mMap;
-    Marker dest, curr , my;
+    Marker dest, curr, my;
 
     Polyline line;
     float red = 0, blue = 240;
@@ -89,10 +94,45 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
             Button ok = (Button) dialogView.findViewById(R.id.ok);
 
 
-            dateString = date.getText().toString();
-            timeSTring = time.getText().toString();
+            ok.setOnClickListener(v1 ->
+                    {
+                        final Dialog dialog = new Dialog(OneWayDateTimeActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setCancelable(false);
+                        dialog.setContentView(R.layout.popupxml);
 
-            ok.setOnClickListener(v1 -> startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class).putExtra("date", dateString).putExtra("time", timeSTring)));
+
+                        TextView txt_inHours = dialog.findViewById(R.id.txt_inHours);
+                        TextView txt_inDays = dialog.findViewById(R.id.txt_inDays);
+
+                        txt_inDays.setOnClickListener(v2 -> {
+
+                            txt_inDays.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                            Common.indayorhour="1";
+                        });
+                        txt_inHours.setOnClickListener(v2 -> {
+
+                            txt_inHours.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                            Common.indayorhour="2";
+
+                        });
+
+                        Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+                        btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
+                        Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+                        btn_ok.setOnClickListener(v15 -> {
+
+
+                            startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
+                            dialog.dismiss();
+                        });
+
+                        dialog.show();
+
+                    }
+            );
 
             date.setOnClickListener(v12 -> {
                 // calender class's instance and get current date , month and year from calender
@@ -110,6 +150,8 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
                                 date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                                Common.date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
 
                             }
                         }, mYear, mMonth, mDay);
@@ -130,8 +172,11 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                Toast.makeText(OneWayDateTimeActivity.this, ""+hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OneWayDateTimeActivity.this, "" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
                                 time.setText(hourOfDay + ":" + minute);
+
+                                Common.time = hourOfDay + ":" + minute;
+
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
@@ -189,7 +234,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                             line.remove();
                         }
                     }
-                    dest = mMap.addMarker(new MarkerOptions().position(destination).title(""+Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
                     Log.e("deeee", "" + dest);
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
@@ -205,27 +250,26 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                         }
 
                     }
-                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title(""+Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
 
                 }
 
-                if (destination != null && Current_loc != null){
+                if (destination != null && Current_loc != null) {
 
 
 
 
            /* line = mMap.addPolyline(new PolylineOptions().geodesic(true)
                     .add(Current_loc, destination).width(10).color(Color.BLACK));*/
-                    String url = getUrl(destination, Current_loc,"driving");
+                    String url = getUrl(destination, Current_loc, "driving");
 
                     Log.e("url", " 11111      " + url);
 
-                    FetchURL fetchURL= new FetchURL(OneWayDateTimeActivity.this,mMap);
+                    FetchURL fetchURL = new FetchURL(OneWayDateTimeActivity.this, mMap);
 
                     fetchURL.execute(url);
-
 
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
@@ -239,7 +283,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
 

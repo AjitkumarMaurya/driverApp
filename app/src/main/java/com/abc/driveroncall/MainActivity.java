@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         btnOneTrip.setOnClickListener(v -> {
             if (destination != null && Current_loc != null) {
-                Common.oneOrTwoWay = "oneway";
+                Common.oneOrTwoWay = "1";
                 startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
             } else {
                 Toast.makeText(context, "Please select place first", Toast.LENGTH_SHORT).show();
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity
         });
         roundTrip.setOnClickListener(v -> {
             if (destination != null && Current_loc != null) {
-                Common.oneOrTwoWay = "twoway";
+                Common.oneOrTwoWay = "2";
                 startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
             } else {
                 Toast.makeText(context, "Please select Place first", Toast.LENGTH_SHORT).show();

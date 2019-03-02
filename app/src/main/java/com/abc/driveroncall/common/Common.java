@@ -14,6 +14,8 @@ public class Common {
     public static String time = "";
     public static String oneOrTwoWay = "";
 
+    public static String indayorhour = "0";
+
 
 public static String greenAddress="";
 

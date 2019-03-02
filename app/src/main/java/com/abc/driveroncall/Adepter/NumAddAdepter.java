@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> {
     Context context;
-
+    NumClick numClick;
     public NumAddAdepter(Context context, ArrayList<String> list) {
         this.context = context;
         this.list = list;
@@ -34,12 +34,14 @@ public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> 
     @Override
     public void onBindViewHolder(@NonNull NumModel numModel, int i) {
 
-        for (int n = 0; n < 8; n++) {
-            Log.i("num", String.valueOf(n));
-        }
-        Log.i("dipak", String.valueOf(i));
-
         numModel.num.setText(String.valueOf(i));
+
+        numModel.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numClick.click(list.get(i),i);
+            }
+        });
     }
 
     @Override
@@ -52,10 +54,17 @@ public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> 
 
         public NumModel(@NonNull View itemView) {
 
-
             super(itemView);
 
             num = itemView.findViewById(R.id.tvNum);
         }
+    }
+
+    public interface NumClick{
+        public void click(String data,int pos);
+    }
+
+    public void SetupInterface(NumClick numClick){
+        this.numClick=numClick;
     }
 }
