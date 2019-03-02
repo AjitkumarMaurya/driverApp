@@ -69,14 +69,6 @@
             android:gravity="center"
              />
 
-        <Button
-            android:id="@+id/calculate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Calculate" />
-
         <TextView
             android:id="@+id/estimateText"
             android:layout_width="match_parent"

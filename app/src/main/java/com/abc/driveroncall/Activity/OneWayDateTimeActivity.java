@@ -68,7 +68,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        if (Common.oneOrTwoWay.equals("oneway")) {
+        if (Common.oneOrTwoWay.equals("1")) {
             Objects.requireNonNull(getSupportActionBar()).setTitle("One Way");
         } else {
             Objects.requireNonNull(getSupportActionBar()).setTitle("Two Way");
@@ -95,41 +95,51 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
 
             ok.setOnClickListener(v1 ->
+
+
                     {
-                        final Dialog dialog = new Dialog(OneWayDateTimeActivity.this);
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setCancelable(false);
-                        dialog.setContentView(R.layout.popupxml);
+                        if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
+
+                            final Dialog dialog = new Dialog(OneWayDateTimeActivity.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setCancelable(false);
+                            dialog.setContentView(R.layout.popupxml);
 
 
-                        TextView txt_inHours = dialog.findViewById(R.id.txt_inHours);
-                        TextView txt_inDays = dialog.findViewById(R.id.txt_inDays);
+                            TextView txt_inHours = dialog.findViewById(R.id.txt_inHours);
+                            TextView txt_inDays = dialog.findViewById(R.id.txt_inDays);
 
-                        txt_inDays.setOnClickListener(v2 -> {
+                            txt_inDays.setOnClickListener(v2 -> {
 
-                            txt_inDays.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                txt_inDays.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                txt_inHours.setBackgroundColor(getResources().getColor(R.color.white));
 
-                            Common.indayorhour="1";
-                        });
-                        txt_inHours.setOnClickListener(v2 -> {
+                                Common.indayorhour = "1";
+                            });
+                            txt_inHours.setOnClickListener(v2 -> {
 
-                            txt_inHours.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                txt_inHours.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                txt_inDays.setBackgroundColor(getResources().getColor(R.color.white));
 
-                            Common.indayorhour="2";
+                                Common.indayorhour = "2";
 
-                        });
+                            });
 
-                        Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-                        btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
-                        Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
-                        btn_ok.setOnClickListener(v15 -> {
+                            Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+                            btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
+                            Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+                            btn_ok.setOnClickListener(v15 -> {
 
+                                startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
+
+                            });
+
+                            dialog.show();
+                        }else {
 
                             startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
-                            dialog.dismiss();
-                        });
 
-                        dialog.show();
+                        }
 
                     }
             );

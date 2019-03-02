@@ -1,6 +1,8 @@
 package com.abc.driveroncall.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +34,6 @@ import retrofit2.Response;
 public class EstimateCostActivity extends AppCompatActivity {
 
     TextView tv_type_select;
-    Button calculate;
     TextView estimateAmount, place1, place2, estimateText;
     String hrBasedCost;
     ProgressDialog dialog;
@@ -51,7 +52,6 @@ public class EstimateCostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estimate_cost);
         tv_type_select = findViewById(R.id.tv_type_select);
-        calculate = findViewById(R.id.calculate);
         estimateAmount = findViewById(R.id.estimateAmount);
         place1 = findViewById(R.id.place1);
         place2 = findViewById(R.id.place2);
@@ -68,6 +68,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
 
 
+        list = new ArrayList<>();
 
 
         if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
@@ -101,8 +102,11 @@ public class EstimateCostActivity extends AppCompatActivity {
                     public void click(String data, int pos) {
 
 
-                        getCostingCall(data);
-                        hourday = data;
+                        float da = Float.valueOf(data);
+
+                        hourday = String.valueOf(da*24);
+                        getCostingCall(hourday);
+                        addAdepter.notifyDataSetChanged();
 
                     }
                 });
@@ -149,6 +153,7 @@ public class EstimateCostActivity extends AppCompatActivity {
                     public void click(String data, int pos) {
                         getCostingCall(data);
                         hourday = data;
+                        addAdepter.notifyDataSetChanged();
 
                     }
                 });
@@ -197,6 +202,7 @@ public class EstimateCostActivity extends AppCompatActivity {
                 public void click(String data, int pos) {
                     getCostingCall(data);
                     hourday = data;
+                    addAdepter.notifyDataSetChanged();
 
                 }
             });
@@ -218,7 +224,34 @@ public class EstimateCostActivity extends AppCompatActivity {
 
         });
 */
-        btn_book.setOnClickListener(v -> driverCall(date, time,hourday,type));
+        btn_book.setOnClickListener(v -> {
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(EstimateCostActivity.this);
+            builder1.setMessage("Sure to book trip ?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            driverCall(date, time, hourday, type);
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+                }
+        );
 
 
         //numAdepter();
@@ -242,7 +275,9 @@ public class EstimateCostActivity extends AppCompatActivity {
             public void onResponse(Call<GetTripRateResponse> call, Response<GetTripRateResponse> response) {
                 dialog.dismiss();
 
-                hrBasedCost = response.body().getTripHourlyRate();
+                hrBasedCost = response.body().getTripRate().getTripHourlyRate();
+
+                Log.e("@@",hrBasedCost+"");
 
                 Integer hrBasedCostInt = Integer.valueOf(hrBasedCost);
 
@@ -250,7 +285,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
                 Integer total = hrBasedCostInt * editTextInt;
 
-                estimateAmount.setText(total.toString());
+                estimateAmount.setText(total.toString()+" Rs.");
                 estimateAmount.setVisibility(View.VISIBLE);
                 estimateText.setVisibility(View.VISIBLE);
 
@@ -280,7 +315,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         Log.e("MYDATA", " Common.placeName2 === " + Common.placeName2);
         Log.e("MYDATA", " enterHour.getText().toString() === " + strhour);
         final ApiInterface api = ApiClient.getApiService();
-        Call<CreateTripResponse> call = api.AddTrip("1", "15-1-2019", "7:30", "1", Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, "Bhopal", Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, "1Bhopal", strhour);
+        Call<CreateTripResponse> call = api.AddTrip("1", date, time, type, Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, Common.placeName1City, Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, Common.placeName2City, strhour);
         call.enqueue(new Callback<CreateTripResponse>() {
             @Override
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {
@@ -292,14 +327,13 @@ public class EstimateCostActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(EstimateCostActivity.this, "Not Sucessfull", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<CreateTripResponse> call, Throwable t) {
                 dialog.dismiss();
                 Toast.makeText(EstimateCostActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
 
 
             }

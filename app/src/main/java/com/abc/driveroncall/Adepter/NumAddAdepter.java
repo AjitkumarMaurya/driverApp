@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.abc.driveroncall.R;
@@ -34,14 +35,21 @@ public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> 
     @Override
     public void onBindViewHolder(@NonNull NumModel numModel, int i) {
 
-        numModel.num.setText(String.valueOf(i));
+        numModel.num.setText(list.get(i));
 
         numModel.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                numModel.lin_root.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
                 numClick.click(list.get(i),i);
             }
         });
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -51,11 +59,13 @@ public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> 
 
     public class NumModel extends RecyclerView.ViewHolder {
         TextView num;
+        LinearLayout lin_root;
 
         public NumModel(@NonNull View itemView) {
 
             super(itemView);
 
+            lin_root =itemView.findViewById(R.id.lin_root);
             num = itemView.findViewById(R.id.tvNum);
         }
     }

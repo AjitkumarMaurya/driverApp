@@ -194,6 +194,8 @@ public class MainActivity extends AppCompatActivity
 
                 Common.placeName1 = place.getAddress().toString();
 
+                Common.placeName1City  = getAddress(context,destination.latitude,destination.longitude);
+
 
                 //desti.setText(place.getName());
                 //destin.setVisibility(View.VISIBLE);
@@ -219,6 +221,9 @@ public class MainActivity extends AppCompatActivity
                 Current_loc = place_c.getLatLng();
 
                 Common.myLatLong2 = Current_loc;
+
+                Common.placeName2City  = getAddress(context,Current_loc.latitude,Current_loc.longitude);
+
 
                 Common.placeName2 = place_c.getAddress().toString();
                 mapFragment.getMapAsync(MainActivity.this);
@@ -613,5 +618,32 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public static String getAddress(Context context, double LATITUDE, double LONGITUDE) {
+        String city="";
+
+        //Set Address
+        try {
+            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null && addresses.size() > 0) {
+
+
+
+                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                city = addresses.get(0).getLocality();
+
+                String state = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
+                String postalCode = addresses.get(0).getPostalCode();
+                String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return city;
     }
 }
