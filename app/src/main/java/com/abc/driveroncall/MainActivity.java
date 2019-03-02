@@ -1,6 +1,7 @@
 package com.abc.driveroncall;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -18,9 +19,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -50,8 +53,11 @@ import com.abc.driveroncall.Activity.PasswordnavChangeActivity;
 import com.abc.driveroncall.Activity.ProfileActivity;
 import com.abc.driveroncall.Activity.UserPrivacyPolicyActivity;
 import com.abc.driveroncall.common.Common;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -76,7 +82,7 @@ import java.util.Locale;
 import static android.os.Build.VERSION_CODES.M;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks , com.google.android.gms.location.LocationListener, GoogleApiClient.OnConnectionFailedListener {
     TextView userName;
     EditText pickup, drop;
     LocationManager mLocationManager;
@@ -96,9 +102,13 @@ public class MainActivity extends AppCompatActivity
     LinearLayout destin;
     float red = 0, blue = 240;
     private MarkerOptions place1, place2;
-    Marker dest, curr;
+    Marker dest, curr , my;
     Polyline line;
+    GoogleApiClient mGoogleApiClient;
+    LocationRequest mLocationRequest;
+    Toolbar toolbar;
 
+    SupportMapFragment mapFragment;
 
     Button showPopupBtn, closePopupBtn;
     PopupWindow popupWindow;
@@ -114,10 +124,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = MainActivity.this;
-        roundTrip = findViewById(R.id.roundTrip);
+        roundTrip = findViewById(R.id.ib_trip_round);
 
         current = findViewById(R.id.your_location);
         desti = findViewById(R.id.your_destination);
@@ -127,32 +137,33 @@ public class MainActivity extends AppCompatActivity
 
         btnOneTrip = (ImageView) findViewById(R.id.imgbtnonetrip);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        btnOneTrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (destination != null && Current_loc != null) {
-                    Common.oneOrTwoWay = "oneway";
-                    startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
-                } else {
-                    Toast.makeText(context, "Please select place first", Toast.LENGTH_SHORT).show();
-                }
+        initCode();
 
+
+    }
+
+    private void initCode() {
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        btnOneTrip.setOnClickListener(v -> {
+            if (destination != null && Current_loc != null) {
+                Common.oneOrTwoWay = "oneway";
+                startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
+            } else {
+                Toast.makeText(context, "Please select place first", Toast.LENGTH_SHORT).show();
             }
+
         });
-        roundTrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (destination != null && Current_loc != null) {
-                    Common.oneOrTwoWay = "twoway";
-                    startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
-                } else {
-                    Toast.makeText(context, "Please select Place first", Toast.LENGTH_SHORT).show();
-                }
+        roundTrip.setOnClickListener(v -> {
+            if (destination != null && Current_loc != null) {
+                Common.oneOrTwoWay = "twoway";
+                startActivity(new Intent(MainActivity.this, OneWayDateTimeActivity.class));
+            } else {
+                Toast.makeText(context, "Please select Place first", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -237,6 +248,8 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
     }
 
     @Override
@@ -281,6 +294,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("ApplySharedPref")
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -390,11 +404,85 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
     public void onLocationChanged(Location location) {
-        int lat = (int) (location.getLatitude());
-        int lng = (int) (location.getLongitude());
+        double lat = (Double) (location.getLatitude());
+        double lng = (Double) (location.getLongitude());
         Log.e("mylocation", "" + lat + lng);
-    }
+
+
+        LatLng sydney = new LatLng(lat, lng);
+        // LatLng sydney = new LatLng(wayLatitude,wayLongitude);
+        //red source blue destination
+        if (destination != null) {
+            if (dest != null) {
+                dest.remove();
+                if (line != null) {
+                    line.remove();
+                }
+            }
+            dest = mMap.addMarker(new MarkerOptions().position(destination).title(""+Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+            Log.e("deeee", "" + dest);
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
+
+
+        }
+        if (Current_loc != null) {
+            if (curr != null) {
+                Log.e("blankkk", "" + curr);
+                curr.remove();
+                if (line != null) {
+                    line.remove();
+                }
+
+            }
+            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title(""+Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
+
+        }
+
+        if (destination != null && Current_loc != null){
+
+
+            if (my != null) {
+                Log.e("blankkk", " 11111      " + curr);
+                my.remove();
+
+            }
+
+           /* line = mMap.addPolyline(new PolylineOptions().geodesic(true)
+                    .add(Current_loc, destination).width(10).color(Color.BLACK));*/
+            String url = getUrl(destination, Current_loc,"driving");
+
+            Log.e("url", " 11111      " + url);
+
+            FetchURL fetchURL= new FetchURL(this,mMap);
+
+            fetchURL.execute(url);
+
+
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 13f));
+
+
+        }else if (destination == null && Current_loc == null){
+
+            if (my != null) {
+                Log.e("blankkk", " 11111      " + curr);
+                my.remove();
+
+            }
+                my = mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(200)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15f));
+
+            }
+
+
+        }
+
+
 
 
     public void getlocation() {
@@ -462,41 +550,26 @@ public class MainActivity extends AppCompatActivity
 
                 Log.e("latttt", "" + wayLatitude);
                 mMap = googleMap;
-                LatLng sydney = new LatLng(wayLatitude, wayLongitude);
-                // LatLng sydney = new LatLng(wayLatitude,wayLongitude);
-                if (destination != null) {
-                    if (dest != null) {
-                        dest.remove();
-                        if (line != null) {
-                            line.remove();
-                        }
-                    }
-                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("Your Destination").icon(BitmapDescriptorFactory.defaultMarker(red)));
-                    Log.e("deeee", "" + dest);
+
+                buildGoogleApiClient();
+                //   mMap.setMyLocationEnabled(true);
 
 
-                }
-                if (Current_loc != null) {
-                    if (curr != null) {
-                        Log.e("blankkk", "" + curr);
-                        curr.remove();
-                        if (line != null) {
-                            line.remove();
-                        }
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-                    }
-                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(blue)));
-                }
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f));
-                if (destination != null && Current_loc != null) {
-                    line = googleMap.addPolyline(new PolylineOptions().geodesic(true)
-                            .add(Current_loc, destination).width(10).color(Color.GREEN));
-                }
             }
-        }, 500);
+        }, 1000);
 
     }
 
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
@@ -512,6 +585,29 @@ public class MainActivity extends AppCompatActivity
         // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
         return url;
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
