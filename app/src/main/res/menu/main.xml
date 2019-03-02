@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_ContactUs"
+        android:orderInCategory="100"
+        android:title="ContactUs"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_About"
+        android:orderInCategory="100"
+        android:title="About As"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Privacy"
+        android:orderInCategory="100"
+        android:title="Privacy Policy"
+        app:showAsAction="never" />
+
+
+</menu>

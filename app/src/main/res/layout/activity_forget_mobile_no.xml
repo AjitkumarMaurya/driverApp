@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Forget_Password.ForgetMobileNoActivity">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_margin="@dimen/_30sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/ic_msg_24dp" />
+        </LinearLayout>
+
+
+        <!--TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="Mobile Verification"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold|italic" />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+
+            android:gravity="center"
+            android:text="Please Enter Your Mobile Number So That We Can Verify"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="+91"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/edt_MobileForPassOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:hint=" Mobile No "
+
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:minEms="10"
+                android:singleLine="true"
+                android:textSize="@dimen/_15sdp"
+
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_SubmitForPassOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_40sdp"
+
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:background="@drawable/round_edittext"
+                android:backgroundTint="@color/colorBlue"
+                android:clickable="true"
+                android:singleLine="true"
+                android:text="Proceed"
+
+                android:textColor="#fff"
+
+                android:textSize="@dimen/_13sdp"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
