@@ -380,6 +380,8 @@ public class MainActivity extends AppCompatActivity
         }
         requestPermissions(remainingPermissions.toArray
                 (new String[remainingPermissions.size()]), 101);
+
+        initCode();
     }
 
     @TargetApi(M)
@@ -466,7 +468,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 13f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
 
 
         }else if (destination == null && Current_loc == null){
