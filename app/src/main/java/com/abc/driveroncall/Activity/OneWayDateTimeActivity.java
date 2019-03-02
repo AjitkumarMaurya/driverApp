@@ -104,6 +104,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                 datePickerDialog = new DatePickerDialog(OneWayDateTimeActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
 
+                            @SuppressLint("SetTextI18n")
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
@@ -130,7 +131,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                                                   int minute) {
 
                                 Toast.makeText(OneWayDateTimeActivity.this, ""+hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
-                               // txtTime.setText(hourOfDay + ":" + minute);
+                                time.setText(hourOfDay + ":" + minute);
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
