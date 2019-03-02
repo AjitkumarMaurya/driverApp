@@ -17,6 +17,7 @@ import com.abc.driveroncall.R;
 import com.abc.driveroncall.response.LoginResponse;
 import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
+import com.abc.driveroncall.utility.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,12 +32,14 @@ public class LoginActivity extends AppCompatActivity {
     String shFname = "", shLname = "", shGmail = "", mobileNoPass = "";
     int userID = 0;
 
+    PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        preferenceManager = new PreferenceManager(this);
         edtUser = findViewById(R.id.edtname);
         edtPassword = findViewById(R.id.edtpassword);
         btnLogin = findViewById(R.id.btnlogin);
@@ -122,6 +125,17 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("mobileNumber", mobileNoPass);
                         editor.putInt("userID", userID);
                         editor.apply();
+
+                        preferenceManager.setRegisteredUserId(String.valueOf(userID));
+
+                        preferenceManager.setKeyValueString("firstName",shFname);
+                        preferenceManager.setKeyValueString("lastName",shLname);
+
+                        preferenceManager.setKeyValueString("email",shGmail);
+
+                        preferenceManager.setKeyValueString("mobileNumber",mobileNoPass);
+
+                        preferenceManager.setLoginSession();
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

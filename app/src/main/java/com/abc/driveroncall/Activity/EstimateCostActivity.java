@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +23,7 @@ import com.abc.driveroncall.response.CreateTripResponse;
 import com.abc.driveroncall.response.GetTripRateResponse;
 import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
+import com.abc.driveroncall.utility.PreferenceManager;
 
 import java.util.ArrayList;
 
@@ -46,6 +46,8 @@ public class EstimateCostActivity extends AppCompatActivity {
     String type = "";
     String hourday = "";
 
+    PreferenceManager preferenceManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class EstimateCostActivity extends AppCompatActivity {
         btn_book = findViewById(R.id.btn_book);
         recyclerView = findViewById(R.id.numRecyclerView);
         dialog = new ProgressDialog(this);
+
+        preferenceManager = new PreferenceManager(this);
 
         place1.setText(Common.placeName1);
         place2.setText(Common.placeName2);
@@ -315,7 +319,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         Log.e("MYDATA", " Common.placeName2 === " + Common.placeName2);
         Log.e("MYDATA", " enterHour.getText().toString() === " + strhour);
         final ApiInterface api = ApiClient.getApiService();
-        Call<CreateTripResponse> call = api.AddTrip("1", date, time, type, Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, Common.placeName1City, Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, Common.placeName2City, strhour);
+        Call<CreateTripResponse> call = api.AddTrip(preferenceManager.getRegisteredUserId(), date, time, type, Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, Common.placeName1City, Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, Common.placeName2City, strhour);
         call.enqueue(new Callback<CreateTripResponse>() {
             @Override
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {

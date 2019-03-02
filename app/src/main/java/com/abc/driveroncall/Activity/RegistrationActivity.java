@@ -18,6 +18,7 @@ import com.abc.driveroncall.R;
 import com.abc.driveroncall.response.RegistesonResponse;
 import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
+import com.abc.driveroncall.utility.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,12 +38,15 @@ public class RegistrationActivity extends AppCompatActivity {
     String no;
     String fisrt;
 
+    PreferenceManager preferenceManager;
+
     String mobileNoPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        preferenceManager = new PreferenceManager(this);
         edtFname = findViewById(R.id.edt_Fname);
         edtLname = findViewById(R.id.edt_Lname);
         edtGmail = findViewById(R.id.edt_Email);
@@ -233,6 +237,23 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         fisrt = getIntent().getStringExtra("dipak");
 
+                        Log.d(TAG, "onResponse() returned: " + response.body().getUserResponse().getUsersFirstName());
+
+                        SharedPreferences.Editor editor = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
+                        editor.putString("firstName", shFname);
+                        editor.putString("lastName", shLname);
+                        editor.putString("email", shGmail);
+                        editor.putString("mobileNumber", mobileNoPass);
+                        editor.putInt("userID", userID);
+                        editor.apply();
+
+                        preferenceManager.setRegisteredUserId(String.valueOf(userID));
+
+                        preferenceManager.setKeyValueString("firstName", shFname);
+                        preferenceManager.setKeyValueString("lastName", shLname);
+                        preferenceManager.setKeyValueString("email", shGmail);
+                        preferenceManager.setKeyValueString("mobileNumber", mobileNoPass);
+                        preferenceManager.setLoginSession();
 
                         Toast.makeText(RegistrationActivity.this, restoredText, Toast.LENGTH_SHORT).show();
 
@@ -244,15 +265,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                         // ----------Set Data SharedPreferences------------------------------
 
-                        Log.d(TAG, "onResponse() returned: " + response.body().getUserResponse().getUsersFirstName());
-
-                        SharedPreferences.Editor editor = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
-                        editor.putString("firstName", shFname);
-                        editor.putString("lastName", shLname);
-                        editor.putString("email", shGmail);
-                        editor.putString("mobileNumber", mobileNoPass);
-                        editor.putInt("userID", userID);
-                        editor.apply();
 
                     }
 
