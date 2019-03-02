@@ -227,7 +227,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
 
 
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 13f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
 
 
                 }
