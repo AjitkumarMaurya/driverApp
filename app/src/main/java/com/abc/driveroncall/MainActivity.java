@@ -380,6 +380,8 @@ public class MainActivity extends AppCompatActivity
         }
         requestPermissions(remainingPermissions.toArray
                 (new String[remainingPermissions.size()]), 101);
+
+        initCode();
     }
 
     @TargetApi(M)
