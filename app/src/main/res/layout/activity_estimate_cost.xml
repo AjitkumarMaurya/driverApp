@@ -28,13 +28,14 @@
 
 
         <TextView
+            android:id="@+id/tv_date_time"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@color/colorBlue"
             android:gravity="center"
-            android:text="12:30 PM"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 

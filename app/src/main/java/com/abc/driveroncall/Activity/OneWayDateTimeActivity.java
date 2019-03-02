@@ -52,6 +52,8 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
     Polyline line;
     float red = 0, blue = 240;
     DatePickerDialog datePickerDialog;
+    TimePickerDialog timePickerDialog;
+
     TimePickerDialog picker;
     String dateString = "";
     String timeSTring = "";
@@ -87,12 +89,19 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
             LayoutInflater inflater = OneWayDateTimeActivity.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
             dialogBuilder.setView(dialogView);
+            AlertDialog alertDialog = dialogBuilder.create();
 
             EditText date = (EditText) dialogView.findViewById(R.id.date);
             EditText time = (EditText) dialogView.findViewById(R.id.time);
             Button cancel = (Button) dialogView.findViewById(R.id.cancel);
             Button ok = (Button) dialogView.findViewById(R.id.ok);
 
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
 
             ok.setOnClickListener(v1 ->
 
@@ -144,54 +153,65 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                     }
             );
 
-            date.setOnClickListener(v12 -> {
-                // calender class's instance and get current date , month and year from calender
-                @SuppressLint({"NewApi", "LocalSuppress"}) final Calendar c = Calendar.getInstance();
-                @SuppressLint({"NewApi", "LocalSuppress"}) int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
-                datePickerDialog = new DatePickerDialog(OneWayDateTimeActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
 
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
-                                date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            final Calendar c = Calendar.getInstance();
 
-                                Common.date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            int mYear = c.get(Calendar.YEAR); // current year
+            int mMonth = c.get(Calendar.MONTH); // current month
+            int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+            // date picker dialog
+            datePickerDialog = new DatePickerDialog(OneWayDateTimeActivity.this,
+                    new DatePickerDialog.OnDateSetListener() {
 
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            // set day of month , month and year value in the edit text
+                            date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                            Common.date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+
+                        }
+                    }, mYear, mMonth, mDay);
+
+            // Launch Time Picker Dialog
+            timePickerDialog = new TimePickerDialog(OneWayDateTimeActivity.this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            Toast.makeText(OneWayDateTimeActivity.this, "" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+                            time.setText(hourOfDay + ":" + minute);
+
+                            Common.time = hourOfDay + ":" + minute;
+
+                        }
+                    }, mHour, mMinute, false);
+
+
+
+            date.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    datePickerDialog.show();
+
+                }
             });
 
-            time.setOnClickListener(v13 -> {
-                final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR_OF_DAY);
-                mMinute = c.get(Calendar.MINUTE);
+            time.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    timePickerDialog.show();
 
-                // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(OneWayDateTimeActivity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-
-                                Toast.makeText(OneWayDateTimeActivity.this, "" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
-                                time.setText(hourOfDay + ":" + minute);
-
-                                Common.time = hourOfDay + ":" + minute;
-
-                            }
-                        }, mHour, mMinute, false);
-                timePickerDialog.show();
-
+                }
             });
+
 
 
             //   eText.setInputType(InputType.TYPE_NULL);
@@ -214,7 +234,6 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
             });*/
 
 
-            AlertDialog alertDialog = dialogBuilder.create();
             alertDialog.show();
 
         });

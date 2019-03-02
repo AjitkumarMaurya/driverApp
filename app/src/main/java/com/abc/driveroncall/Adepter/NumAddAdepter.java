@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> {
     Context context;
     NumClick numClick;
+    int selectedPosition = -1;
+
     public NumAddAdepter(Context context, ArrayList<String> list) {
         this.context = context;
         this.list = list;
@@ -37,10 +39,20 @@ public class NumAddAdepter extends RecyclerView.Adapter<NumAddAdepter.NumModel> 
 
         numModel.num.setText(list.get(i));
 
+        if (selectedPosition == i){
+            numModel.lin_root.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+
+        }else {
+
+            numModel.lin_root.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+        }
+
+
         numModel.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numModel.lin_root.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                selectedPosition = i;
                 numClick.click(list.get(i),i);
             }
         });

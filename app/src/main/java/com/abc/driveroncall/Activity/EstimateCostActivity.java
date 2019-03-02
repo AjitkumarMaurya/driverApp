@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class EstimateCostActivity extends AppCompatActivity {
 
-    TextView tv_type_select;
+    TextView tv_type_select,tv_date_time;
     TextView estimateAmount, place1, place2, estimateText;
     String hrBasedCost;
     ProgressDialog dialog;
@@ -55,6 +55,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_estimate_cost);
         tv_type_select = findViewById(R.id.tv_type_select);
         estimateAmount = findViewById(R.id.estimateAmount);
+        tv_date_time = findViewById(R.id.tv_date_time);
         place1 = findViewById(R.id.place1);
         place2 = findViewById(R.id.place2);
         estimateText = findViewById(R.id.estimateText);
@@ -71,6 +72,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         time = Common.time;
 
 
+        tv_date_time.setText(""+date+" "+time);
 
         list = new ArrayList<>();
 
@@ -272,6 +274,12 @@ public class EstimateCostActivity extends AppCompatActivity {
 */
 
     public void getCostingCall(String editText) {
+
+        ProgressDialog progressDialog = new ProgressDialog(EstimateCostActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Calculating faire..");
+        progressDialog.show();
+
         final ApiInterface api = ApiClient.getApiService();
         Call<GetTripRateResponse> call = api.getTripRate();
         call.enqueue(new Callback<GetTripRateResponse>() {
@@ -283,16 +291,17 @@ public class EstimateCostActivity extends AppCompatActivity {
 
                 Log.e("@@",hrBasedCost+"");
 
-                Integer hrBasedCostInt = Integer.valueOf(hrBasedCost);
+                float hrBasedCostInt = Float.valueOf(hrBasedCost);
 
-                Integer editTextInt = Integer.valueOf(editText);
+                float editTextInt = Float.valueOf(editText);
 
-                Integer total = hrBasedCostInt * editTextInt;
+                float total = hrBasedCostInt * editTextInt;
 
-                estimateAmount.setText(total.toString()+" Rs.");
+                estimateAmount.setText(total+" Rs.");
                 estimateAmount.setVisibility(View.VISIBLE);
                 estimateText.setVisibility(View.VISIBLE);
 
+                progressDialog.dismiss();
 
             }
 
@@ -301,6 +310,7 @@ public class EstimateCostActivity extends AppCompatActivity {
                 dialog.dismiss();
                 Toast.makeText(EstimateCostActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
+                progressDialog.dismiss();
 
             }
         });
