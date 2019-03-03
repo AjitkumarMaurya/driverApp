@@ -105,7 +105,6 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
             ok.setOnClickListener(v1 ->
 
-
                     {
                         if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
 
@@ -144,7 +143,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                             });
 
                             dialog.show();
-                        }else {
+                        } else {
 
                             startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
 
@@ -195,7 +194,6 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                     }, mHour, mMinute, false);
 
 
-
             date.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -211,7 +209,6 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
 
                 }
             });
-
 
 
             //   eText.setInputType(InputType.TYPE_NULL);

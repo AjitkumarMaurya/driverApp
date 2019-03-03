@@ -6,7 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Book_Now"
-            android:title="Book Now" />
+            android:title="Book Now"
+            android:icon="@drawable/bookdriver"/>
         <!--<item
             android:id="@+id/nav_My_Driver"
             android:icon="@drawable/ic_menu_gallery"
@@ -18,16 +19,24 @@
 -->
         <item
             android:id="@+id/nav_Profile"
+            android:icon="@drawable/ic_profile"
             android:title="Profile" />
 
         //code redi but sum problem to code hide
         <item
+            android:id="@+id/nav_payments"
+            android:title="Payments"
+            android:icon="@drawable/ic_payment"/>
+
+        <item
             android:id="@+id/nav_MyTrips"
-            android:title="My Trips" />
+            android:title="My Trips"
+            android:icon="@drawable/ic_trips"/>
 
         <item
             android:id="@+id/nav_change"
-            android:title="Change Password" />
+            android:title="Change Password"
+            android:icon="@drawable/changepass"/>
 
 
     <!--    <item
@@ -42,7 +51,8 @@
             android:title="Privacy Policy" />-->
         <item
             android:id="@+id/nav_UserLogout"
-            android:title="Logout" />
+            android:title="Logout"
+            android:icon="@drawable/logout"/>
 
     </group>
 

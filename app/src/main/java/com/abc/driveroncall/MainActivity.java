@@ -49,6 +49,7 @@ import com.abc.driveroncall.Activity.LoginActivity;
 import com.abc.driveroncall.Activity.MyTripsActivity;
 import com.abc.driveroncall.Activity.OneWayDateTimeActivity;
 import com.abc.driveroncall.Activity.PasswordnavChangeActivity;
+import com.abc.driveroncall.Activity.PaymentsActivity;
 import com.abc.driveroncall.Activity.ProfileActivity;
 import com.abc.driveroncall.Activity.UserPrivacyPolicyActivity;
 import com.abc.driveroncall.common.Common;
@@ -314,6 +315,8 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(new Intent(MainActivity.this, MyTripsActivity.class));
 
+        } else if (id == R.id.nav_payments) {
+            startActivity(new Intent(MainActivity.this, PaymentsActivity.class));
         } else if (id == R.id.nav_change) {
             startActivity(new Intent(MainActivity.this, PasswordnavChangeActivity.class));
 

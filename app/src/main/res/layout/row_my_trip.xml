@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
-        android:background="#fff">
+        android:backgroundTint="@color/black">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,7 +29,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_car1_24" />
+                        android:src="@drawable/ic_car1_24"
+                        android:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/tvPleshGoing"
@@ -37,20 +38,20 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:text="mehsana"
+                        android:textColor="@color/txtcolor"
                         android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <View
-
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
-                    android:background="#000" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white" />
                 <!-- android:layout_marginRight="@dimen/_40sdp"
                  android:layout_marginLeft="@dimen/_45sdp"
  -->
@@ -67,17 +68,18 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/_10sdp"
                             android:layout_gravity="right"
-                            android:src="@drawable/ic_location_24dp" />
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:src="@drawable/ic_location_24dp"
+                            android:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/tvPleshFrom"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:text="asdsdsadsdasd"
+                            android:textColor="@color/txtcolor"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </RelativeLayout>
@@ -86,13 +88,12 @@
 
             <View
                 android:layout_width="wrap_content"
-
                 android:layout_height="@dimen/_1sdp"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="#b4abab" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,15 +101,17 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <TextView
-
                         android:id="@+id/tvGreenText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_radio_green_24dp" />
+                        android:drawableLeft="@drawable/ic_radio_green_24dp"
+                        android:textColor="@color/txtcolor" />
 
 
                     <TextView
@@ -117,7 +120,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvGreenText"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_radio_red_24dp" />
+                        android:drawableLeft="@drawable/ic_radio_red_24dp"
+                        android:textColor="@color/txtcolor" />
 
 
                     <TextView
@@ -126,8 +130,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:backgroundTint="@color/txtcolor"
+                        android:drawableTint="@color/white"
                         android:drawableTop="@drawable/ic_car_blue24dp"
                         android:text="one -Way"
+                        android:textColor="@color/colorBlue"
                         android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
@@ -136,13 +143,12 @@
 
             <View
                 android:layout_width="wrap_content"
-
                 android:layout_height="@dimen/_1sdp"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="#b4abab" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,18 +162,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_marginLeft="@dimen/_9sdp"
                         android:text="hr"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
 
                     <TextView
-
                         android:id="@+id/tvTimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
@@ -175,32 +180,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_date_24dp"
-
-
-                        android:textSize="15dp" />
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/txtcolor"
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:id="@+id/tvPayment"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_below="@+id/tvTimeText"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_rupee_24"
+                        android:drawableTint="@color/gray"
+                        android:textColor="@color/txtcolor"
                         android:textSize="@dimen/_15sdp" />
-
 
                     <TextView
                         android:id="@+id/tvTime"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvDate"
                         android:layout_alignParentRight="true"
+                        android:layout_below="@+id/tvDate"
+                        android:layout_marginRight="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_ime__24dp"
-
-
-                        android:textSize="@dimen/_15sdp" />
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/txtcolor"
+                        android:textSize="@dimen/_14sdp" />
 
                 </RelativeLayout>
 

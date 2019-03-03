@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PaymentsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_10sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/gray">
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:src="@drawable/paytmicon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/paytm"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_12sdp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/gray">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/mobikwik" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mobikwik"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_12sdp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/gray">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/cashicon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cash"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_12sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

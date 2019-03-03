@@ -8,4 +8,18 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="current_amount">&#x20B9;</string>
+    <string name="onetrip">ONEWAY-TRIP</string>
+    <string name="roundtrip">ROUND-TRIP</string>
+    <string name="choosetrip">Choose Your Trip Type</string>
+    <string name="choosedatetime">Choose Date &amp; Time </string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="date">DATE</string>
+    <string name="time">TIME</string>
+    <string name="hours">IN HOURS</string>
+    <string name="days">IN DAYS</string>
+    <string name="selecthoursdays">Select Trip In Hours Or Days</string>
+    <string name="paytm">Paytm</string>
+    <string name="mobikwik">mobikwik</string>
+    <string name="cash">Cash</string>
 </resources>

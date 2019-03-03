@@ -25,7 +25,10 @@ import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
 import com.abc.driveroncall.utility.PreferenceManager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,11 +71,29 @@ public class EstimateCostActivity extends AppCompatActivity {
         place1.setText(Common.placeName1);
         place2.setText(Common.placeName2);
         Intent intent = getIntent();
+
+        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        String outputPattern = "dd-MMM-yyyy h:mm a";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date1 = null;
+        String str = null;
+
+        try {
+            date1 = inputFormat.parse(time);
+            Date date = inputFormat.parse(outputPattern);
+            String outputDateStr = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        str=date;
         date = Common.date;
         time = Common.time;
 
 
-        tv_date_time.setText(""+date+" "+time);
+        tv_date_time.setText(""+date1+" "+str);
 
         list = new ArrayList<>();
 

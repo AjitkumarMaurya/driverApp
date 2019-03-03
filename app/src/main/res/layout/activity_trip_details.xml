@@ -15,7 +15,6 @@
 
         <TextView
             android:padding="@dimen/_10sdp"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="pick up location address"

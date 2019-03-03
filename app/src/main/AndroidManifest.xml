@@ -56,7 +56,7 @@
             android:name=".Activity.OtpActivity"
             android:label="Register"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.VerifyOtpActivity"
             android:label="Change your password Intent intent = new Intent(context, MapsActivity.class); "
@@ -116,7 +116,8 @@
         <activity
             android:name=".Activity.OneWayDateTimeActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.TripDetailsActivity"/>
+        <activity android:name=".Activity.TripDetailsActivity" />
+        <activity android:name=".Activity.PaymentsActivity"></activity>
     </application>
 
 </manifest>

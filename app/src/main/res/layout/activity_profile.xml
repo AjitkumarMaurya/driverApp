@@ -6,205 +6,198 @@
     android:background="#fff"
     tools:context=".Activity.ProfileActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00a"
-            android:gravity="center"
-            android:padding="@dimen/_10sdp"
-            android:text="MY PROFILE"
-            android:textColor="#ffff"
-            android:textSize="@dimen/_10sdp"
-            android:textStyle="bold" />
-
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/profile_image1"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/_10sdp">
-
-
-            </LinearLayout>
+                android:background="@drawable/user"
+                android:backgroundTint="@color/colorBlue" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_30sdp"
-                android:layout_marginRight="@dimen/_30sdp"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10sdp">
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="First Name" />
+
+                        <EditText
+                            android:id="@+id/edtFnamePro"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="@dimen/_5sdp"
+
+                            android:singleLine="true"
+
+
+                            android:textSize="@dimen/_15sdp" />
+
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="First Name" />
+
+                        android:layout_alignParentRight="true"
+                        android:text="Last Name" />
 
                     <EditText
-                        android:id="@+id/edtFnamePro"
+                        android:id="@+id/edtLnamePro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="@dimen/_5sdp"
+
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:singleLine="true"
+
+                        android:textSize="@dimen/_15sdp"
+                        tools:layout_editor_absoluteX="66dp"
+                        tools:layout_editor_absoluteY="31dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email Name" />
+
+                    <EditText
+                        android:id="@+id/edtEmailPro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
+                        android:focusableInTouchMode="true"
+
+                        android:hint="Email Id"
+                        android:inputType="textEmailAddress"
                         android:singleLine="true"
+                        android:textSize="@dimen/_15sdp"
+                        tools:layout_editor_absoluteX="57dp"
+                        tools:layout_editor_absoluteY="61dp" />
 
-                        android:layout_marginTop="@dimen/_5sdp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Birth of Date" />
+
+                    <EditText
+                        android:id="@+id/edtBobPro"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:hint="31-03-1998"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_15sdp"
+                        tools:layout_editor_absoluteX="36dp"
+                        tools:layout_editor_absoluteY="204dp" />
 
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address" />
+
+                    <EditText
+                        android:id="@+id/edtPremanentAdderssPro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:maxLines="2"
+                        android:minEms="1"
                         android:textSize="@dimen/_15sdp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pincode No" />
+
+                    <EditText
+                        android:id="@+id/edtPincodePro"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:inputType="numberDecimal"
+                        android:maxEms="6"
+                        android:maxHeight="@dimen/_6sdp"
+                        android:maxLength="6"
+                        android:minEms="6"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_15sdp"
+
+                        tools:layout_editor_absoluteX="47dp"
+                        tools:layout_editor_absoluteY="92dp" />
+
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btnSavePro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginRight="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/round_edittext"
+                        android:backgroundTint="#00a"
+                        android:singleLine="true"
+                        android:text="Save"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_15sdp" />
 
                 </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentRight="true"
-                    android:text="Last Name" />
-
-                <EditText
-                    android:id="@+id/edtLnamePro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:singleLine="true"
-
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-
-                    android:textSize="@dimen/_15sdp"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="31dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email Name" />
-
-                <EditText
-                    android:id="@+id/edtEmailPro"
-                    android:layout_width="match_parent"
-                    android:singleLine="true"
-
-                    android:layout_height="wrap_content"
-
-                    android:focusableInTouchMode="true"
-                    android:inputType="textEmailAddress"
-                    android:hint="Email Id"
-                    android:textSize="@dimen/_15sdp"
-                    tools:layout_editor_absoluteX="57dp"
-                    tools:layout_editor_absoluteY="61dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Birth of Date" />
-
-                <EditText
-                    android:id="@+id/edtBobPro"
-                    android:singleLine="true"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="31-03-1998"
-                    android:textSize="@dimen/_15sdp"
-                    tools:layout_editor_absoluteX="36dp"
-                    tools:layout_editor_absoluteY="204dp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address" />
-
-                <EditText
-                    android:id="@+id/edtPremanentAdderssPro"
-                    android:maxLines="2"
-                    android:minEms="1"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_15sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pincode No" />
-
-                <EditText
-                    android:id="@+id/edtPincodePro"
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                  android:inputType="numberDecimal"
-                    android:maxHeight="@dimen/_6sdp"
-                    android:singleLine="true"
-                    android:textSize="@dimen/_15sdp"
-                    android:maxEms="6"
-                    android:maxLength="6"
-                    android:minEms="6"
-
-                    tools:layout_editor_absoluteX="47dp"
-                    tools:layout_editor_absoluteY="92dp" />
-
 
 
             </LinearLayout>
 
 
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/btnSavePro"
-
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_50sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:background="@drawable/round_edittext"
-                    android:backgroundTint="#00a"
-
-                    android:singleLine="true"
-                    android:text="Save"
-                    android:textColor="#fff"
-                    android:textSize="@dimen/_15sdp"
-
-
-                    />
-
-
-
-            </RelativeLayout>
-
-
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
