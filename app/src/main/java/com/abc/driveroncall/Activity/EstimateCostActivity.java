@@ -82,23 +82,13 @@ public class EstimateCostActivity extends AppCompatActivity {
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
-        Date date1 = null;
-        String str = null;
 
-        try {
-            date1 = inputFormat.parse(time);
-            Date date = inputFormat.parse(outputPattern);
-            String outputDateStr = outputFormat.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        str = date;
         date = Common.date;
         time = Common.time;
 
 
-        tv_date_time.setText("" + date1 + " " + str);
+        tv_date_time.setText("D:" + date + "  T:" + time);
 
         list = new ArrayList<>();
 

@@ -53,6 +53,7 @@ import com.abc.driveroncall.Activity.PaymentsActivity;
 import com.abc.driveroncall.Activity.ProfileActivity;
 import com.abc.driveroncall.Activity.UserPrivacyPolicyActivity;
 import com.abc.driveroncall.common.Common;
+import com.abc.driveroncall.utility.PreferenceManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity
     RelativeLayout linearLayout1;
     Dialog myDialog;
     ImageView btnOneTrip, roundTrip;
+    PreferenceManager preferenceManager;
 
     FusedLocationProviderClient fusedLocationProviderClient;
     private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission
@@ -135,6 +137,8 @@ public class MainActivity extends AppCompatActivity
         myCard = findViewById(R.id.myCard);
 
         btnOneTrip = (ImageView) findViewById(R.id.imgbtnonetrip);
+
+        preferenceManager =new PreferenceManager(this);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -180,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         ((EditText) places.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(12.0f);
-        places.setHint("Your Location");
+        places.setHint("From  ");
 
         places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -195,6 +199,10 @@ public class MainActivity extends AppCompatActivity
 
                 Common.placeName1City = getAddress(context, destination.latitude, destination.longitude);
 
+                if (mMap != null){
+                    mMap.clear();
+
+                }
 
                 //desti.setText(place.getName());
                 //destin.setVisibility(View.VISIBLE);
@@ -213,7 +221,7 @@ public class MainActivity extends AppCompatActivity
         PlaceAutocompleteFragment places_current = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_current);
         ((EditText) places_current.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(12.0f);
-        places.setHint("Where To Go");
+        places_current.setHint("To ");
         places_current.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place_c) {
@@ -225,6 +233,12 @@ public class MainActivity extends AppCompatActivity
 
 
                 Common.placeName2 = place_c.getAddress().toString();
+
+                if (mMap != null){
+                    mMap.clear();
+
+                }
+
                 mapFragment.getMapAsync(MainActivity.this);
                 Toast.makeText(getApplicationContext(), place_c.getName(), Toast.LENGTH_SHORT).show();
                 // place1 = new MarkerOptions().position(Current_loc).title("Place 1");
@@ -245,10 +259,11 @@ public class MainActivity extends AppCompatActivity
 //---------------------------------navigation Name--------------------------------------------------------------------
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-
         View header = navigationView.getHeaderView(0);
 
         userName = (TextView) header.findViewById(R.id.lastName);
+
+        userName.setText(preferenceManager.getKeyValueString("firstName")+" "+preferenceManager.getKeyValueString("lastName"));
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -315,9 +330,9 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(new Intent(MainActivity.this, MyTripsActivity.class));
 
-        } else if (id == R.id.nav_payments) {
+        } /*else if (id == R.id.nav_payments) {
             startActivity(new Intent(MainActivity.this, PaymentsActivity.class));
-        } else if (id == R.id.nav_change) {
+        } */else if (id == R.id.nav_change) {
             startActivity(new Intent(MainActivity.this, PasswordnavChangeActivity.class));
 
         } else if (id == R.id.nav_Profile) {
@@ -348,6 +363,8 @@ public class MainActivity extends AppCompatActivity
             editor.commit();
             finish();
 */
+
+            preferenceManager.clearPreferences();
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -466,6 +483,12 @@ public class MainActivity extends AppCompatActivity
             String url = getUrl(destination, Current_loc, "driving");
 
             Log.e("url", " 11111      " + url);
+
+
+            dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+            Log.e("deeee", "" + dest);
+            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+
 
             FetchURL fetchURL = new FetchURL(this, mMap);
 

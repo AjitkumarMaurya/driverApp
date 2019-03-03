@@ -1,5 +1,6 @@
 package com.abc.driveroncall.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import com.abc.driveroncall.response.UserProfileResponse;
 import com.abc.driveroncall.response.UserProfileUpdateResponse;
 import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
+import com.abc.driveroncall.utility.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,10 +39,14 @@ public class ProfileActivity extends AppCompatActivity {
     TextView changePassword;
     DatePickerDialog datePickerDialog;
 
+    PreferenceManager preferenceManager;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        preferenceManager = new PreferenceManager(this);
 
         edtFname = findViewById(R.id.edtFnamePro);
 
@@ -53,10 +59,18 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         dialog = new ProgressDialog(this);
-        SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
-        restoredText = prefs.getInt("userID", 0);
 
-        myid = Integer.toString(restoredText);
+        myid = preferenceManager.getRegisteredUserId();
+
+
+
+
+        edtFname.setText(""+preferenceManager.getKeyValueString("firstName"));
+        edtLname.setText(""+preferenceManager.getKeyValueString("lastName"));
+        edtGmali.setText(""+preferenceManager.getKeyValueString("email"));
+        edtAddress.setText(""+preferenceManager.getKeyValueString("uAddress"));
+        edtBoD.setText(""+preferenceManager.getKeyValueString("uBdate"));
+        edtPincode.setText(""+preferenceManager.getKeyValueString("uPinCode"));
 
 
 //get Data SharedPreferences
@@ -85,27 +99,6 @@ public class ProfileActivity extends AppCompatActivity {
                                         eGmail = edtGmali.getText().toString().trim();
 
                                         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-                                       /* // onClick of button perform this simplest code.
-                                        if (eGmail.matches(emailPattern)) {
-                                            //   Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            edtGmali.setError("Invalid email address");
-                                            // Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                        if (eFirst.isEmpty() || eLast.isEmpty() || eGmail.isEmpty() || eAddress.isEmpty() || eBod.isEmpty() || ePin.isEmpty()) {
-
-                                            edtFname.setError("Enter First Name");
-                                            edtLname.setError("Enter Last Name");
-                                            edtGmali.setError("Enter Email");
-                                            edtAddress.setError("Enter Address");
-                                            edtBoD.setError("BirthDate");
-                                            edtPincode.setError("Pincode Code");
-
-                                        } else {
-                                            ProfileUpdate();
-                                        }*/
 
 //-------------------------------------------------------
 
@@ -229,31 +222,38 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        dialog.setMessage("Data is Updating...");
-        dialog.show();
+
 
 
         final ApiInterface api = ApiClient.getApiService();
         Call<UserProfileUpdateResponse> call = api.getUpDateProfile(myid);
         call.enqueue(new Callback<UserProfileUpdateResponse>() {
+                         @SuppressLint("SetTextI18n")
                          @Override
                          public void onResponse(Call<UserProfileUpdateResponse> call, Response<UserProfileUpdateResponse> response) {
-                             dialog.dismiss();
 
                              if (response != null && response.isSuccessful()) {
 
-                                 edtFname.setText(response.body().getUserProfileUpDateModel().getUsersFirstName());
+                                 edtFname.setText(""+response.body().getUserProfileUpDateModel().getUsersFirstName());
+                                 edtLname.setText(""+response.body().getUserProfileUpDateModel().getUsersLastName());
+                                 edtGmali.setText(""+response.body().getUserProfileUpDateModel().getUsersEmail());
+                                 edtAddress.setText(""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
+                                 edtBoD.setText(""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
+                                 edtPincode.setText(""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
 
-                                 edtLname.setText(response.body().getUserProfileUpDateModel().getUsersLastName());
 
-                                 edtGmali.setText(response.body().getUserProfileUpDateModel().getUsersEmail());
+                                 preferenceManager.setKeyValueString("firstName",""+response.body().getUserProfileUpDateModel().getUsersFirstName());
+                                 preferenceManager.setKeyValueString("lastName",""+response.body().getUserProfileUpDateModel().getUsersLastName());
+                                 preferenceManager.setKeyValueString("email",""+response.body().getUserProfileUpDateModel().getUsersEmail());
+                                 preferenceManager.setKeyValueString("uAddress",""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
+                                 preferenceManager.setKeyValueString("uBdate",""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
+                                 preferenceManager.setKeyValueString("uPinCode",""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
 
                              }
                          }
 
                          @Override
                          public void onFailure(Call<UserProfileUpdateResponse> call, Throwable t) {
-                             dialog.dismiss();
 
                          }
                      }

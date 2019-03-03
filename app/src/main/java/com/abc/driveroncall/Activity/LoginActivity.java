@@ -111,10 +111,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     } else {
 
-                        shFname = response.body().getUserResponse().getUsersFirstName();
-                        shLname = response.body().getUserResponse().getUsersLastName();
-                        shGmail = response.body().getUserResponse().getUsersEmail();
-                        mobileNoPass = response.body().getUserResponse().getUsersContactNo();
+                        shFname = ""+response.body().getUserResponse().getUsersFirstName();
+                        shLname = ""+response.body().getUserResponse().getUsersLastName();
+                        shGmail = ""+response.body().getUserResponse().getUsersEmail();
+                        mobileNoPass = ""+response.body().getUserResponse().getUsersContactNo();
                         userID = response.body().getUserResponse().getUsersId();
 
 
@@ -132,6 +132,10 @@ public class LoginActivity extends AppCompatActivity {
                         preferenceManager.setKeyValueString("lastName",shLname);
 
                         preferenceManager.setKeyValueString("email",shGmail);
+
+                        preferenceManager.setKeyValueString("uAddress",""+response.body().getUserResponse().getUsersAddress().toString());
+                        preferenceManager.setKeyValueString("uBdate",""+response.body().getUserResponse().getUsersBirthDate().toString());
+                        preferenceManager.setKeyValueString("uPinCode",""+response.body().getUserResponse().getUsersPincode().toString());
 
                         preferenceManager.setKeyValueString("mobileNumber",mobileNoPass);
 
