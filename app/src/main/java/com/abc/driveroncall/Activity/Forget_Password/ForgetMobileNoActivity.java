@@ -61,7 +61,6 @@ public class ForgetMobileNoActivity extends AppCompatActivity {
         editor.apply();
 
 
-
         dialog.setMessage("Data is Updating...");
         dialog.show();
 

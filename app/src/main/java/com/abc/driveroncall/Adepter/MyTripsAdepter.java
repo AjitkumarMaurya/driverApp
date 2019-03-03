@@ -1,6 +1,7 @@
 package com.abc.driveroncall.Adepter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.abc.driveroncall.Activity.TripDetailsActivity;
 import com.abc.driveroncall.R;
 import com.abc.driveroncall.model.UserMyTripModel;
 
@@ -37,11 +39,27 @@ public class MyTripsAdepter extends RecyclerView.Adapter<MyTripsAdepter.TripMode
     @Override
     public void onBindViewHolder(@NonNull TripModel tripModel, int i) {
 
+        String pickuppointlat, pickuppointlang, droppointlat, droppointlang, pickupCityName, dropCityName, PickupPointName, kms, dropPointName, tripType, tripUsage, tripAmount, tripEndDate, tripEndTime;
+
+        pickupCityName = list.get(i).getTripAstPickupPointCityName();
+        dropCityName = list.get(i).getTripAstDropPointCityName();
+        PickupPointName = list.get(i).getTripAstPickupPointName();
+        dropPointName = list.get(i).getTripAstDropPointName();
+        tripType = list.get(i).getTripTypeId();
+        tripUsage = list.get(i).getTripUsage();
+        tripAmount = list.get(i).getTripAmount();
+        tripEndDate = list.get(i).getTripEndDate();
+        tripEndTime = list.get(i).getTripEndTime();
+        pickuppointlat = list.get(i).getTripAstPickupPointLat();
+        pickuppointlang = list.get(i).getTripAstPickupPointLang();
+        droppointlat = list.get(i).getTripAstDropPointLat();
+        droppointlang = list.get(i).getTripAstDropPointLang();
+        kms = list.get(i).getTripKmsDriven();
 
         tripModel.upTrip.setText(list.get(i).getTripAstPickupPointCityName());
         tripModel.downTrip.setText(list.get(i).getTripAstDropPointCityName());
-        tripModel.upTripLocation.setText(list.get(i).getTripPickupPointName());
-        tripModel.downTripLoaction.setText(list.get(i).getTripDropPointName());
+        tripModel.upTripLocation.setText(list.get(i).getTripAstPickupPointName());
+        tripModel.downTripLoaction.setText(list.get(i).getTripAstDropPointName());
         tripModel.tvTripType.setText(list.get(i).getTripsType());
         tripModel.tvTimeText.setText(list.get(i).getTripUsage());
         tripModel.tvPayment.setText(list.get(i).getTripAmount());
@@ -51,6 +69,22 @@ public class MyTripsAdepter extends RecyclerView.Adapter<MyTripsAdepter.TripMode
         tripModel.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent myIntent = new Intent(context, TripDetailsActivity.class);
+                myIntent.putExtra("pickupCityName", pickupCityName);
+                myIntent.putExtra("dropCityName", dropCityName);
+                myIntent.putExtra("PickupPointName", PickupPointName);
+                myIntent.putExtra("dropPointName", dropPointName);
+                myIntent.putExtra("tripType", tripType);
+                myIntent.putExtra("tripUsage", tripUsage);
+                myIntent.putExtra("tripAmount", tripAmount);
+                myIntent.putExtra("tripEndDate", tripEndDate);
+                myIntent.putExtra("tripEndTime", tripEndTime);
+                myIntent.putExtra("kms", kms);
+                myIntent.putExtra("pickuppointlat", pickuppointlat);
+                myIntent.putExtra("pickuppointlang", pickuppointlang);
+                myIntent.putExtra("droppointlat", droppointlat);
+                myIntent.putExtra("droppointlang", droppointlang);
+                context.startActivity(myIntent);
 
 
             }

@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -72,7 +71,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,7 +80,7 @@ import java.util.Locale;
 import static android.os.Build.VERSION_CODES.M;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks , com.google.android.gms.location.LocationListener, GoogleApiClient.OnConnectionFailedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener, GoogleApiClient.OnConnectionFailedListener {
     TextView userName;
     EditText pickup, drop;
     LocationManager mLocationManager;
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     LinearLayout destin;
     float red = 0, blue = 240;
     private MarkerOptions place1, place2;
-    Marker dest, curr , my;
+    Marker dest, curr, my;
     Polyline line;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
@@ -194,7 +192,7 @@ public class MainActivity extends AppCompatActivity
 
                 Common.placeName1 = place.getAddress().toString();
 
-                Common.placeName1City  = getAddress(context,destination.latitude,destination.longitude);
+                Common.placeName1City = getAddress(context, destination.latitude, destination.longitude);
 
 
                 //desti.setText(place.getName());
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity
 
                 Common.myLatLong2 = Current_loc;
 
-                Common.placeName2City  = getAddress(context,Current_loc.latitude,Current_loc.longitude);
+                Common.placeName2City = getAddress(context, Current_loc.latitude, Current_loc.longitude);
 
 
                 Common.placeName2 = place_c.getAddress().toString();
@@ -252,7 +250,6 @@ public class MainActivity extends AppCompatActivity
         userName = (TextView) header.findViewById(R.id.lastName);
 
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
     }
@@ -430,7 +427,7 @@ public class MainActivity extends AppCompatActivity
                     line.remove();
                 }
             }
-            dest = mMap.addMarker(new MarkerOptions().position(destination).title(""+Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+            dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
             Log.e("deeee", "" + dest);
 
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
@@ -446,13 +443,13 @@ public class MainActivity extends AppCompatActivity
                 }
 
             }
-            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title(""+Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
 
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
 
         }
 
-        if (destination != null && Current_loc != null){
+        if (destination != null && Current_loc != null) {
 
 
             if (my != null) {
@@ -463,35 +460,32 @@ public class MainActivity extends AppCompatActivity
 
            /* line = mMap.addPolyline(new PolylineOptions().geodesic(true)
                     .add(Current_loc, destination).width(10).color(Color.BLACK));*/
-            String url = getUrl(destination, Current_loc,"driving");
+            String url = getUrl(destination, Current_loc, "driving");
 
             Log.e("url", " 11111      " + url);
 
-            FetchURL fetchURL= new FetchURL(this,mMap);
+            FetchURL fetchURL = new FetchURL(this, mMap);
 
             fetchURL.execute(url);
-
 
 
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
 
 
-        }else if (destination == null && Current_loc == null){
+        } else if (destination == null && Current_loc == null) {
 
             if (my != null) {
                 Log.e("blankkk", " 11111      " + curr);
                 my.remove();
 
             }
-                my = mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(200)));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15f));
-
-            }
-
+            my = mMap.addMarker(new MarkerOptions().position(sydney).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(200)));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15f));
 
         }
 
 
+    }
 
 
     public void getlocation() {
@@ -564,7 +558,7 @@ public class MainActivity extends AppCompatActivity
                 //   mMap.setMyLocationEnabled(true);
 
 
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
             }
         }, 1000);
@@ -621,14 +615,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static String getAddress(Context context, double LATITUDE, double LONGITUDE) {
-        String city="";
+        String city = "";
 
         //Set Address
         try {
             Geocoder geocoder = new Geocoder(context, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
             if (addresses != null && addresses.size() > 0) {
-
 
 
                 String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()

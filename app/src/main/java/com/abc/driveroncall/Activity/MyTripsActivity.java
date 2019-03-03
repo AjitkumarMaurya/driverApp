@@ -1,5 +1,6 @@
 package com.abc.driveroncall.Activity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MyTripsActivity extends AppCompatActivity {
     MyTripsAdepter myTripsAdepter;
     int restoredText;
     String myid;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,9 @@ public class MyTripsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_trips);
         recyclerView = findViewById(R.id.tripTypeRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        dialog = new ProgressDialog(MyTripsActivity.this);
+        dialog.setMessage("Please Wait...");
+        dialog.show();
         SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
         restoredText = prefs.getInt("userID", 0);
 
@@ -50,6 +54,7 @@ public class MyTripsActivity extends AppCompatActivity {
         call.enqueue(new Callback<MyTripsResponse>() {
             @Override
             public void onResponse(Call<MyTripsResponse> call, Response<MyTripsResponse> response) {
+                dialog.dismiss();
 
                 if (response != null && response.isSuccessful()) {
 
@@ -67,6 +72,7 @@ public class MyTripsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyTripsResponse> call, Throwable t) {
+                dialog.dismiss();
                 Toast.makeText(MyTripsActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
