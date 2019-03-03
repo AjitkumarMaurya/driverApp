@@ -1,7 +1,6 @@
 package com.abc.driveroncall.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -18,6 +17,7 @@ public class FleshActivity extends AppCompatActivity {
     long Delay = 1000;
 
     PreferenceManager preferenceManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

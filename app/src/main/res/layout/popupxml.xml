@@ -12,45 +12,45 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="@dimen/_40sdp"
-            android:text="@string/selecthoursdays"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:padding="@dimen/_10sdp"
             android:background="@color/colorBlue"
-            android:gravity="center" />
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/selecthoursdays"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/txt_inHours"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
-        android:hint="@string/hours"
         android:layout_gravity="center"
-        android:paddingTop="@dimen/_5sdp"
+        android:layout_margin="@dimen/_10sdp"
         android:background="@color/gray"
+        android:hint="@string/hours"
         android:paddingLeft="@dimen/_5sdp"
-        android:textSize="@dimen/_12sdp"
+        android:paddingTop="@dimen/_5sdp"
         android:textColor="@color/colorBlue"
-        android:layout_margin="@dimen/_10sdp" />
+        android:textSize="@dimen/_12sdp" />
 
     <TextView
         android:id="@+id/txt_inDays"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@color/gray"
         android:hint="@string/days"
         android:paddingLeft="@dimen/_5sdp"
         android:paddingTop="@dimen/_5sdp"
-        android:layout_gravity="center"
-        android:background="@color/gray"
-        android:textSize="@dimen/_12sdp"
         android:textColor="@color/colorBlue"
-        android:layout_margin="@dimen/_10sdp"  />
+        android:textSize="@dimen/_12sdp" />
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
@@ -58,20 +58,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="bold"
-            android:textColor="@color/white"
             android:background="@color/txtcolor"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="bold"
             android:background="@color/colorBlue"
+            android:text="@string/ok"
             android:textColor="@color/white"
-            android:text="@string/ok" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
