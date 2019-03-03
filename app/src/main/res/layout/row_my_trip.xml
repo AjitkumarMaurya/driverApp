@@ -7,8 +7,7 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:backgroundTint="@color/black">
+        android:layout_margin="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,8 +28,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_car1_24"
-                        android:tint="@color/white" />
+                        android:src="@drawable/ic_car1_24" />
 
                     <TextView
                         android:id="@+id/tvPleshGoing"
@@ -38,12 +36,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:text="mehsana"
-                        android:textColor="@color/txtcolor"
                         android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <View
+                    android:background="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_alignParentTop="true"
@@ -51,7 +49,7 @@
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/white" />
+                     />
                 <!-- android:layout_marginRight="@dimen/_40sdp"
                  android:layout_marginLeft="@dimen/_45sdp"
  -->
@@ -71,7 +69,7 @@
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:src="@drawable/ic_location_24dp"
-                            android:tint="@color/white" />
+                             />
 
                         <TextView
                             android:id="@+id/tvPleshFrom"
@@ -79,7 +77,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:text="asdsdsadsdasd"
-                            android:textColor="@color/txtcolor"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </RelativeLayout>
@@ -110,8 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_radio_green_24dp"
-                        android:textColor="@color/txtcolor" />
+                        android:drawableLeft="@drawable/ic_radio_green_24dp" />
 
 
                     <TextView
@@ -120,8 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvGreenText"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_radio_red_24dp"
-                        android:textColor="@color/txtcolor" />
+                        android:drawableLeft="@drawable/ic_radio_red_24dp" />
 
 
                     <TextView
@@ -130,8 +125,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:backgroundTint="@color/txtcolor"
-                        android:drawableTint="@color/white"
                         android:drawableTop="@drawable/ic_car_blue24dp"
                         android:text="one -Way"
                         android:textColor="@color/colorBlue"
@@ -148,7 +141,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white" />
+                android:background="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,15 +157,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_9sdp"
                         android:text="hr"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
 
                     <TextView
                         android:id="@+id/tvTimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
@@ -182,8 +174,6 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_date_24dp"
-                        android:drawableTint="@color/white"
-                        android:textColor="@color/txtcolor"
                         android:textSize="@dimen/_14sdp" />
 
                     <TextView
@@ -193,8 +183,6 @@
                         android:layout_below="@+id/tvTimeText"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_rupee_24"
-                        android:drawableTint="@color/gray"
-                        android:textColor="@color/txtcolor"
                         android:textSize="@dimen/_15sdp" />
 
                     <TextView
@@ -206,8 +194,6 @@
                         android:layout_marginRight="@dimen/_7sdp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:drawableLeft="@drawable/ic_ime__24dp"
-                        android:drawableTint="@color/white"
-                        android:textColor="@color/txtcolor"
                         android:textSize="@dimen/_14sdp" />
 
                 </RelativeLayout>

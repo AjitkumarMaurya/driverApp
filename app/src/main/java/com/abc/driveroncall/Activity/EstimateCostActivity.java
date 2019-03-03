@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -36,10 +37,10 @@ import retrofit2.Response;
 
 public class EstimateCostActivity extends AppCompatActivity {
 
-    TextView tv_type_select,tv_date_time;
+    TextView tv_type_select, tv_date_time;
     TextView estimateAmount, place1, place2, estimateText;
     String hrBasedCost;
-    ProgressDialog dialog;
+    ProgressDialog pdialog;
     Button btn_book;
     NumAddAdepter addAdepter;
     ArrayList<String> list;
@@ -56,6 +57,9 @@ public class EstimateCostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estimate_cost);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Booking");
         tv_type_select = findViewById(R.id.tv_type_select);
         estimateAmount = findViewById(R.id.estimateAmount);
         tv_date_time = findViewById(R.id.tv_date_time);
@@ -64,7 +68,8 @@ public class EstimateCostActivity extends AppCompatActivity {
         estimateText = findViewById(R.id.estimateText);
         btn_book = findViewById(R.id.btn_book);
         recyclerView = findViewById(R.id.numRecyclerView);
-        dialog = new ProgressDialog(this);
+        pdialog = new ProgressDialog(this);
+        pdialog.setMessage("Please Wait...");
 
         preferenceManager = new PreferenceManager(this);
 
@@ -88,12 +93,12 @@ public class EstimateCostActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        str=date;
+        str = date;
         date = Common.date;
         time = Common.time;
 
 
-        tv_date_time.setText(""+date1+" "+str);
+        tv_date_time.setText("" + date1 + " " + str);
 
         list = new ArrayList<>();
 
@@ -131,13 +136,12 @@ public class EstimateCostActivity extends AppCompatActivity {
 
                         float da = Float.valueOf(data);
 
-                        hourday = String.valueOf(da*24);
+                        hourday = String.valueOf(da * 24);
                         getCostingCall(hourday);
                         addAdepter.notifyDataSetChanged();
 
                     }
                 });
-
 
 
             } else if (Common.indayorhour.equalsIgnoreCase("2")) {
@@ -188,7 +192,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
             }
 
-        }else {
+        } else {
 
             list.add("1");
             list.add("2");
@@ -237,7 +241,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
         }
 
-        type  = Common.oneOrTwoWay;
+        type = Common.oneOrTwoWay;
 
 
 
@@ -253,29 +257,30 @@ public class EstimateCostActivity extends AppCompatActivity {
 */
         btn_book.setOnClickListener(v -> {
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(EstimateCostActivity.this);
-            builder1.setMessage("Sure to book trip ?");
-            builder1.setCancelable(true);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(EstimateCostActivity.this);
+                    builder1.setMessage("Sure to book trip ?");
+                    builder1.setCancelable(true);
 
-            builder1.setPositiveButton(
-                    "Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                            driverCall(date, time, hourday, type);
-                        }
-                    });
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    pdialog.show();
+                                    driverCall(date, time, hourday, type);
+                                }
+                            });
 
-            builder1.setNegativeButton(
-                    "No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
 
                 }
         );
@@ -306,11 +311,11 @@ public class EstimateCostActivity extends AppCompatActivity {
         call.enqueue(new Callback<GetTripRateResponse>() {
             @Override
             public void onResponse(Call<GetTripRateResponse> call, Response<GetTripRateResponse> response) {
-                dialog.dismiss();
+                pdialog.dismiss();
 
                 hrBasedCost = response.body().getTripRate().getTripHourlyRate();
 
-                Log.e("@@",hrBasedCost+"");
+                Log.e("@@", hrBasedCost + "");
 
                 float hrBasedCostInt = Float.valueOf(hrBasedCost);
 
@@ -318,7 +323,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
                 float total = hrBasedCostInt * editTextInt;
 
-                estimateAmount.setText(total+" Rs.");
+                estimateAmount.setText(total + " Rs.");
                 estimateAmount.setVisibility(View.VISIBLE);
                 estimateText.setVisibility(View.VISIBLE);
 
@@ -328,7 +333,7 @@ public class EstimateCostActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetTripRateResponse> call, Throwable t) {
-                dialog.dismiss();
+                pdialog.dismiss();
                 Toast.makeText(EstimateCostActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
                 progressDialog.dismiss();
@@ -339,7 +344,7 @@ public class EstimateCostActivity extends AppCompatActivity {
     }
 
 
-    public void driverCall(String date, String time,String strhour,String type) {
+    public void driverCall(String date, String time, String strhour, String type) {
         Log.e("MYDATA", "date === " + date);
         Log.e("MYDATA", " time === " + time);
         Log.e("MYDATA", " Common.myLatLong.latitude === " + Common.myLatLong.latitude);
@@ -354,7 +359,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         call.enqueue(new Callback<CreateTripResponse>() {
             @Override
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {
-                dialog.dismiss();
+                pdialog.dismiss();
 
                 if (response.body().getCreateTrip()) {
                     Toast.makeText(EstimateCostActivity.this, "Create Trip SucessFull", Toast.LENGTH_SHORT).show();
@@ -366,9 +371,8 @@ public class EstimateCostActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CreateTripResponse> call, Throwable t) {
-                dialog.dismiss();
+                pdialog.dismiss();
                 Toast.makeText(EstimateCostActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
 
 
             }
@@ -376,5 +380,14 @@ public class EstimateCostActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

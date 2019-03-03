@@ -5,13 +5,11 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -106,8 +104,8 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
             ok.setOnClickListener(v1 ->
 
                     {
-                        if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
 
+                        if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
                             final Dialog dialog = new Dialog(OneWayDateTimeActivity.this);
                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                             dialog.setCancelable(false);
@@ -137,14 +135,14 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                             btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
                             Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
                             btn_ok.setOnClickListener(v15 -> {
-
+                                dialog.dismiss();
                                 startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
 
                             });
 
                             dialog.show();
                         } else {
-
+                            alertDialog.dismiss();
                             startActivity(new Intent(OneWayDateTimeActivity.this, EstimateCostActivity.class));
 
                         }

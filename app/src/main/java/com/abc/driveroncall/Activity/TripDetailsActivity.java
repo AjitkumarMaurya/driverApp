@@ -35,6 +35,9 @@ public class TripDetailsActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_details);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Booking Details");
 
         tvTripType = findViewById(R.id.tvTripType);
         tvDate = findViewById(R.id.tvTrip_Date);
@@ -179,4 +182,5 @@ public class TripDetailsActivity extends AppCompatActivity implements OnMapReady
         return url;
 
     }
+
 }
