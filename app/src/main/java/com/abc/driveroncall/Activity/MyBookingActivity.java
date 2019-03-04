@@ -17,6 +17,8 @@ import com.abc.driveroncall.retrofit.ApiClient;
 import com.abc.driveroncall.retrofit.ApiInterface;
 import com.abc.driveroncall.utility.PreferenceManager;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +40,7 @@ public class MyBookingActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.ps_br);
         textView = findViewById(R.id.tv_no_data);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         initCode();
 
