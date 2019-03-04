@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Activity.MyBookingActivity"></activity>
         <activity android:name=".Activity.COngratulationScreen" />
         <activity android:name=".Activity.EstimateCostActivity" />
         <activity
@@ -117,7 +118,7 @@
             android:name=".Activity.OneWayDateTimeActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.TripDetailsActivity" />
-        <activity android:name=".Activity.PaymentsActivity"></activity>
+        <activity android:name=".Activity.PaymentsActivity" />
     </application>
 
 </manifest>

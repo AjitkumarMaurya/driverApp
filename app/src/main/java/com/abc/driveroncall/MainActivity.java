@@ -46,6 +46,7 @@ import android.widget.Toast;
 import com.abc.driveroncall.Activity.AboutActivity;
 import com.abc.driveroncall.Activity.ContactUsActivity;
 import com.abc.driveroncall.Activity.LoginActivity;
+import com.abc.driveroncall.Activity.MyBookingActivity;
 import com.abc.driveroncall.Activity.MyTripsActivity;
 import com.abc.driveroncall.Activity.OneWayDateTimeActivity;
 import com.abc.driveroncall.Activity.PasswordnavChangeActivity;
@@ -340,10 +341,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 
 
-        } /*else if (id == R.id.nav_About) {
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+        } else if (id == R.id.nav_Mybook) {
+            startActivity(new Intent(MainActivity.this, MyBookingActivity.class));
 
-        } else if (id == R.id.nav_ContactUs) {
+        } /*else if (id == R.id.nav_ContactUs) {
 
             startActivity(new Intent(MainActivity.this, ContactUsActivity.class));
         } else if (id == R.id.nav_UserPrivacyPolicy) {

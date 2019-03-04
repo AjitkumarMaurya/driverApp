@@ -77,18 +77,19 @@ public class EstimateCostActivity extends AppCompatActivity {
         place2.setText(Common.placeName2);
         Intent intent = getIntent();
 
-        String inputPattern = "yyyy-MM-dd HH:mm:ss";
-        String outputPattern = "dd-MMM-yyyy h:mm a";
+        String inputPattern = "yyyy-MM-dd";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
 
 
-        date = Common.date;
-        time = Common.time;
+        date = inputFormat.format(Common.date);
+        time = Common.time+":00";
 
 
-        tv_date_time.setText("D:" + date + "  T:" + time);
+        tv_date_time.setText("D:" + Common.date + "  T:" + Common.time);
+
+
+        Log.e("@@", date+" "+time);
 
         list = new ArrayList<>();
 

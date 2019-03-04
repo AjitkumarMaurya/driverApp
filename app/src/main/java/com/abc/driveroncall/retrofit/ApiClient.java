@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Administrator on 2/26/2018.
  */
-
 public class ApiClient {
     private static final String ROOT_URL = "https://oddeveninfotech.com/driverBooking/public/";
     private static Retrofit getRetrofitInstance() {

@@ -7,6 +7,7 @@ import com.abc.driveroncall.response.ForgotOtpPassResponse;
 import com.abc.driveroncall.response.ForgotOtpResponse;
 import com.abc.driveroncall.response.GetTripRateResponse;
 import com.abc.driveroncall.response.LoginResponse;
+import com.abc.driveroncall.response.MyBookResponce;
 import com.abc.driveroncall.response.MyTripsResponse;
 import com.abc.driveroncall.response.OtpResponse;
 import com.abc.driveroncall.response.OtpVerification;
@@ -86,6 +87,9 @@ public interface ApiInterface {
 
     @GET("users/getTripRate")
     Call<GetTripRateResponse> getTripRate();
+
+    @GET("users/myBookings")
+    Call<MyBookResponce> getMyBooking(@Query("userId") String userId);
 
     @GET("users/addTrip")
     Call<CreateTripResponse> AddTrip(@Query("userId") String userId,
