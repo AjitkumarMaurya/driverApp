@@ -81,8 +81,12 @@ public class EstimateCostActivity extends AppCompatActivity {
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
 
 
+        try {
+            date = String.valueOf(inputFormat.parse(Common.date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        date = inputFormat.format(Common.date);
         time = Common.time+":00";
 
 
