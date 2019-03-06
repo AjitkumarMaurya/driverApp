@@ -49,6 +49,7 @@ public class EstimateCostActivity extends AppCompatActivity {
     String time = "";
     String type = "";
     String hourday = "";
+    String totalPrice = "0";
 
     PreferenceManager preferenceManager;
 
@@ -261,8 +262,14 @@ public class EstimateCostActivity extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
-                                    pdialog.show();
-                                    driverCall(date, time, hourday, type);
+
+                                    if (totalPrice.equalsIgnoreCase("0")){
+                                        Toast.makeText(EstimateCostActivity.this, "Calculate trip faire..", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        pdialog.show();
+                                        driverCall(date, time, hourday, type, totalPrice);
+
+                                    }
                                 }
                             });
 
@@ -317,7 +324,7 @@ public class EstimateCostActivity extends AppCompatActivity {
                 float editTextInt = Float.valueOf(editText);
 
                 float total = hrBasedCostInt * editTextInt;
-
+                totalPrice = total+"";
                 estimateAmount.setText(total + " Rs.");
                 estimateAmount.setVisibility(View.VISIBLE);
                 estimateText.setVisibility(View.VISIBLE);
@@ -339,7 +346,7 @@ public class EstimateCostActivity extends AppCompatActivity {
     }
 
 
-    public void driverCall(String date, String time, String strhour, String type) {
+    public void driverCall(String date, String time, String strhour, String type,String price) {
         Log.e("MYDATA", "date === " + date);
         Log.e("MYDATA", " time === " + time);
         Log.e("MYDATA", " Common.myLatLong.latitude === " + Common.myLatLong.latitude);
@@ -350,7 +357,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         Log.e("MYDATA", " Common.placeName2 === " + Common.placeName2);
         Log.e("MYDATA", " enterHour.getText().toString() === " + strhour);
         final ApiInterface api = ApiClient.getApiService();
-        Call<CreateTripResponse> call = api.AddTrip(preferenceManager.getRegisteredUserId(), date, time, type, Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, Common.placeName1City, Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, Common.placeName2City, strhour);
+        Call<CreateTripResponse> call = api.AddTrip(preferenceManager.getRegisteredUserId(), date, time, type, Common.myLatLong.latitude, Common.myLatLong.longitude, Common.placeName1, Common.placeName1City, Common.myLatLong2.latitude, Common.myLatLong2.longitude, Common.placeName2, Common.placeName2City, strhour,price);
         call.enqueue(new Callback<CreateTripResponse>() {
             @Override
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {

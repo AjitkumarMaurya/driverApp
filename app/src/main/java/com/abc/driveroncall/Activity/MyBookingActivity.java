@@ -2,14 +2,18 @@ package com.abc.driveroncall.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abc.driveroncall.Adepter.MyBookingAdapter;
 import com.abc.driveroncall.R;
 import com.abc.driveroncall.response.GetTripRateResponse;
 import com.abc.driveroncall.response.MyBookResponce;
@@ -66,8 +70,12 @@ public class MyBookingActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         textView.setVisibility(View.GONE);
 
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MyBookingActivity.this, LinearLayout.VERTICAL, false));
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
+                        MyBookingAdapter myBookingAdapter =new MyBookingAdapter(MyBookingActivity.this,response.body());
+                        recyclerView.setAdapter(myBookingAdapter);
 
 
 

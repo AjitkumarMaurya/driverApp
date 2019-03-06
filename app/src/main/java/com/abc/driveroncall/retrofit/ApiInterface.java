@@ -104,7 +104,8 @@ public interface ApiInterface {
                                      @Query("trip_drop_point_lang") Double trip_drop_point_lang,
                                      @Query("trip_drop_point_address") String trip_drop_point_address,
                                      @Query("trip_drop_point_city_name") String trip_drop_point_city_name,
-                                     @Query("trip_ast_usage") String trip_ast_usage);
+                                     @Query("trip_ast_usage") String trip_ast_usage,
+                                     @Query("trip_amount") String trip_amount);
 
 
 }

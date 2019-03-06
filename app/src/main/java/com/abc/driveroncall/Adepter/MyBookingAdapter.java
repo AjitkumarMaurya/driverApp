@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.abc.driveroncall.R;
@@ -41,6 +42,19 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.myHo
             @Override
             public void onClick(View v) {
 
+                if (h.lin_more.getVisibility()==View.VISIBLE){
+
+                    h.lin_more.setVisibility(View.GONE);
+
+                    h.btn_more.setText("MORE DETAILS");
+
+                }else {
+
+                    h.lin_more.setVisibility(View.VISIBLE);
+                    h.btn_more.setText("HIDE DETAILS");
+
+                }
+
             }
         });
 
@@ -50,6 +64,18 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.myHo
         h.tv_trip_no.setText(myBookResponce.getMyBookings().get(i).getTripUniqueId()+"");
         h.tv_trip_pick_poin.setText(myBookResponce.getMyBookings().get(i).getTripAstPickupPointName()+"");
 
+        h.tv_drop_point.setText(myBookResponce.getMyBookings().get(i).getTripAstDropPointName()+"");
+        h.tv_amount.setText(myBookResponce.getMyBookings().get(i).getTripAmount()+"");
+
+        h.tv_driver_name.setText(myBookResponce.getMyBookings().get(i).getTripDriverName()+"");
+        h.tv_driver_number.setText(myBookResponce.getMyBookings().get(i).getTripDriverMobile()+"");
+
+        h.btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -59,18 +85,29 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.myHo
 
     class myHolder extends RecyclerView.ViewHolder{
 
-        TextView tv_trip_no,tv_trip_pick_poin,tv_trip_date,tv_trip_time;
+        TextView tv_trip_no,tv_trip_pick_poin,tv_trip_date,tv_trip_time,tv_drop_point,tv_amount,tv_driver_name,tv_driver_number;
 
-        Button btn_more;
+        Button btn_more,btn_cancel;
+
+        LinearLayout lin_more;
 
          myHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_trip_no = itemView.findViewById(R.id.tv_trip_no);
-            tv_trip_pick_poin = itemView.findViewById(R.id.tv_trip_pick_poin);
-            tv_trip_date = itemView.findViewById(R.id.tv_trip_date);
-            tv_trip_time = itemView.findViewById(R.id.tv_trip_time);
-            btn_more = itemView.findViewById(R.id.btn_more);
-        }
+             tv_trip_pick_poin = itemView.findViewById(R.id.tv_trip_pick_poin);
+             tv_trip_date = itemView.findViewById(R.id.tv_trip_date);
+             tv_trip_time = itemView.findViewById(R.id.tv_trip_time);
+             btn_more = itemView.findViewById(R.id.btn_more);
+
+             tv_drop_point = itemView.findViewById(R.id.tv_drop_point);
+             tv_amount = itemView.findViewById(R.id.tv_amount);
+             tv_driver_name = itemView.findViewById(R.id.tv_driver_name);
+             tv_driver_number = itemView.findViewById(R.id.tv_driver_number);
+             btn_cancel = itemView.findViewById(R.id.btn_cancel);
+
+             lin_more = itemView.findViewById(R.id.lin_more_details);
+
+         }
     }
 }
