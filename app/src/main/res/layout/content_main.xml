@@ -4,31 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.userapp.driveroncall.MainActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_height="0dp"
+        android:layout_weight="6">
+
+        <LinearLayout
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:elevation="4dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:padding="@dimen/_4sdp"
+            android:id="@+id/lin1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginTop="5dp">
+
+            <fragment
+                android:id="@+id/place_autocomplete_fragment"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:elevation="4dp"
+            android:background="@color/white"
+            android:padding="@dimen/_4sdp"
+            android:layout_below="@id/lin1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_28sdp">
+
+            <fragment
+                android:id="@+id/place_autocomplete_fragment_current"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <fragment
-            android:id="@+id/place_autocomplete_fragment"
-            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </RelativeLayout>
 
-        <fragment
-            android:id="@+id/place_autocomplete_fragment_current"
-            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,36 +103,15 @@
             android:textStyle="normal" />
     </LinearLayout>
 
-    <!--<EditText-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:layout_marginLeft="20dp"-->
-    <!--android:layout_marginTop="5dp"-->
-    <!--android:id="@+id/pick"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:hint="Enter Pickup Location"/>-->
-    <!--<EditText-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:id="@+id/drop"-->
-    <!--android:layout_marginLeft="20dp"-->
-    <!--android:layout_marginTop="5dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:hint="Enter Drop Location"/>-->
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" />
+
 
     <TextView
+
+        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_25sdp"
+        android:layout_height="wrap_content"
         android:background="@color/gray"
-        android:paddingLeft="@dimen/_12sdp"
-        android:paddingTop="@dimen/_5sdp"
         android:text="@string/choosetrip"
         android:textColor="@color/colorBlue"
         android:textSize="@dimen/_12sdp"
@@ -116,7 +125,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="@dimen/_85sdp"
             android:orientation="horizontal"
             android:weightSum="2">
 

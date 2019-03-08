@@ -58,9 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/txtcolor"
+            android:background="@drawable/boarder"
             android:text="@string/cancel"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button

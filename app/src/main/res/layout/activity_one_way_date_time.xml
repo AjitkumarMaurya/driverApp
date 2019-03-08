@@ -4,15 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.OneWayDateTimeActivity">
+    tools:context="com.userapp.driveroncall.Activity.OneWayDateTimeActivity">
 
     <LinearLayout
+        android:elevation="4dp"
+        android:layout_alignParentTop="true"
         android:id="@+id/ll"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:layout_margin="@dimen/_4sdp"
             android:id="@+id/place1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,10 +26,11 @@
             android:textSize="13sp" />
 
         <TextView
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
             android:id="@+id/place2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
             android:background="@drawable/boarder"
             android:padding="10dp"
             android:text="location"
@@ -39,11 +44,8 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll" />
+         />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/btntimeDate"
@@ -53,6 +55,5 @@
             android:background="@color/colorBlue"
             android:text="SCHEDULE"
             android:textColor="#fff" />
-    </RelativeLayout>
 
 </RelativeLayout>

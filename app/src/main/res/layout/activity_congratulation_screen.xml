@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.COngratulationScreen">
+    tools:context="com.userapp.driveroncall.Activity.COngratulationScreen">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="Congratulations your rider call you short time. "
+        android:text="Congratulations your driver call you short time. "
         android:textSize="25sp" />
 
 </RelativeLayout>

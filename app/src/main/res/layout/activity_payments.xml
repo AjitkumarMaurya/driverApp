@@ -1,83 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.PaymentsActivity">
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="@color/white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_date_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="date"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_trip_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="trip no"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/_10sdp">
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/_7sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/myicon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_34sdp"
+                android:layout_weight="0.5"
+                android:src="@drawable/meater" />
+
+            <TextView
+                android:id="@+id/tv_amount_trip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="00"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/trip_hours"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="1 Hrs"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_start_trip_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tv_start_trip_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_60sdp"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_end_trip_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tv_end_trip_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_60sdp"
+                android:text="" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Bill Details"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text="Your Trip"
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text="GST"
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_gst"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text="CGST"
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_cgst"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/acc_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text="Accomodation"
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_accomodation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/food_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text="Food"
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_food"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/gray">
-            
+            android:background="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="Payment"
+            android:textSize="22sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_pay_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:text=""
+                android:textSize="20sp" />
+
+            <TextView
+
+                android:id="@+id/tv_trip_amount_grand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Pay now" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:src="@drawable/paytmicon" />
+                android:src="@drawable/persentage" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/paytm"
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:layout_gravity="center"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/_12sdp"/>
+                android:text="Use Coupon"
+                android:textSize="20sp" />
+
         </LinearLayout>
+
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/_7sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/gray">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/mobikwik" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mail" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mobikwik"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/_12sdp"/>
+                android:text="Email Invoice"
+                android:textSize="20sp" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/_7sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/gray">
 
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/cashicon" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cash"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/_12sdp"/>
-        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+
+</RelativeLayout>
+

@@ -5,20 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ContactUsActivity"
+    tools:context="com.userapp.driveroncall.Activity.ContactUsActivity"
     android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/_20sdp"
+    android:layout_margin="@dimen/_10sdp"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/ps_br"
+        android:padding="@dimen/_120sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvContactUsNumber"
         android:gravity="center"
         android:textSize="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvContactUs"
         android:textSize="@dimen/_14sdp"
         android:layout_width="match_parent"

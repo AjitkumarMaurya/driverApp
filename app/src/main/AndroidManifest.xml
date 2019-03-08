@@ -9,33 +9,54 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/user_app_icon"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/user_app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Activity.MyBookingActivity"></activity>
-        <activity android:name=".Activity.COngratulationScreen" />
-        <activity android:name=".Activity.EstimateCostActivity" />
         <activity
-            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:label="My Booking"
+            android:name="com.userapp.driveroncall.Activity.MyBookingActivity"/>
+
+        <activity
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.COngratulationScreen" />
+        <activity
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.EstimateCostActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.RegistrationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.ProfileActivity"
             android:label="Profile"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.FleshActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.FleshActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -45,23 +66,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.VarificationOtpActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.VarificationOtpActivity"
             android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.PasswordnavChangeActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.PasswordnavChangeActivity"
             android:label="Password"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.OtpActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.OtpActivity"
             android:label="Register"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.VerifyOtpActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.VerifyOtpActivity"
             android:label="Change your password Intent intent = new Intent(context, MapsActivity.class); "
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -76,49 +105,80 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activity.map.MapsActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.map.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.AboutActivity"
             android:label="About Us "
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.ContactUsActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.ContactUsActivity"
             android:label="Contact Us"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.UserPrivacyPolicyActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.UserPrivacyPolicyActivity"
             android:label="Privacy Policy"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.MyTripsActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.MyTripsActivity"
             android:label="My Trips"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.Forget_Password.ForgetMobileNoActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.Forget_Password.ForgetMobileNoActivity"
             android:label="Forget Password"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.Forget_Password.ForgotOtpActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.Forget_Password.ForgotOtpActivity"
             android:label="Forget Password"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.Forget_Password.PasswordUpdateActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.Forget_Password.PasswordUpdateActivity"
             android:label="Forget Password"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.userapp.driveroncall.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.OneWayDateTimeActivity"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.OneWayDateTimeActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.TripDetailsActivity" />
-        <activity android:name=".Activity.PaymentsActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.TripDetailsActivity" />
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:icon="@drawable/user_app_icon"
+            android:name="com.userapp.driveroncall.Activity.PaymentsActivity" />
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="@string/razor_api"/>
+
+
     </application>
 
 </manifest>

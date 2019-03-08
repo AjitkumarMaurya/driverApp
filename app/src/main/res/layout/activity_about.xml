@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/_25sdp"
+    android:layout_margin="@dimen/_8sdp"
     android:layout_height="match_parent"
-    tools:context=".Activity.AboutActivity">
+    tools:context="com.userapp.driveroncall.Activity.AboutActivity">
 
     <TextView
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:padding="@dimen/_8sdp"
         android:id="@+id/tvAboutAs"
         android:textSize="@dimen/_14sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/ps_br"
+        android:padding="@dimen/_126sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

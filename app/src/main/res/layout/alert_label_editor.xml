@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_8sdp"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical">
 
 
@@ -14,7 +18,19 @@
         android:textStyle="bold"
         android:background="@color/colorBlue"
         android:gravity="center"/>
+
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        android:layout_marginTop="@dimen/_8sdp"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:textColorSelected="@color/colorPrimary"/>
+
+
     <EditText
+        android:tag="0"
+        android:focusable="false"
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
@@ -29,6 +45,7 @@
 
 
     <EditText
+        android:focusable="auto"
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
@@ -54,8 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:background="@color/txtcolor"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/boarder"
             android:text="@string/cancel" />
 
         <Button

@@ -4,14 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.UserPrivacyPolicyActivity">
+    tools:context="com.userapp.driveroncall.Activity.UserPrivacyPolicyActivity">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/_5sdp"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:visibility="visible"
+            android:id="@+id/ps_br"
+            android:padding="@dimen/_120sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <TextView
+            android:visibility="gone"
             android:id="@+id/userProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

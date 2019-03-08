@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context=".Activity.OneWayDateTimeActivity">
+    tools:context="com.userapp.driveroncall.Activity.OneWayDateTimeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,17 +32,33 @@
             android:textSize="13sp" />
 
 
-        <TextView
-            android:id="@+id/tv_date_time"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/colorBlue"
+        <LinearLayout
+            android:layout_marginTop="@dimen/_8sdp"
             android:gravity="center"
-            android:text=""
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/colorBlue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <ImageView
+                android:src="@drawable/ic_date_range_black_24dp"
+                android:tint="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorBlue"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
@@ -101,9 +117,62 @@
     </LinearLayout>
 
 
+
     <RelativeLayout
+        android:id="@+id/rely1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="@dimen/_4sdp"
+            android:layout_above="@id/btn_book"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <LinearLayout
+                android:id="@+id/lin_cash"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+               <ImageView
+                   android:src="@drawable/cash_icon"
+                   android:layout_width="@dimen/_24sdp"
+                   android:layout_height="@dimen/_24sdp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:text="Cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_online"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@drawable/online_pay"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:text="Online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_book"
