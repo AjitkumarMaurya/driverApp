@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "840625968358",
+    "firebase_url": "https://driver-on-call-2c37d.firebaseio.com",
+    "project_id": "driver-on-call-2c37d",
+    "storage_bucket": "driver-on-call-2c37d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840625968358:android:954b3e7b2a40cdc3",
+        "android_client_info": {
+          "package_name": "com.userapp.driveroncall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840625968358-9gehbtjbdm17vc611vh6qvdferonr55u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.userapp.driveroncall",
+            "certificate_hash": "80ac706031bec4bd6db8c30524f12b0418d0a5fb"
+          }
+        },
+        {
+          "client_id": "840625968358-6tdln3bjdkmful0odr5sjjata2c62gl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ElofjuaKp7SgsHWxuNHMFIoraEfxZEg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840625968358-6tdln3bjdkmful0odr5sjjata2c62gl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

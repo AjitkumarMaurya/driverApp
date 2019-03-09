@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -69,7 +70,10 @@ dependencies {
 
 
     implementation('com.razorpay:checkout:1.4.9')
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
 
     //timeDate
 
 }
+apply plugin: 'com.google.gms.google-services'
