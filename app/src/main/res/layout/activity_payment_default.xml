@@ -10,6 +10,11 @@
 
 
     <CheckBox
+        android:button="@drawable/check_box"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/boarder"
+        android:drawablePadding="@dimen/_30sdp"
+        android:drawableLeft="@drawable/online_pay"
         android:id="@+id/ch_online"
         android:textSize="25sp"
         android:text="Online"
@@ -17,9 +22,16 @@
         android:layout_height="wrap_content" />
 
     <CheckBox
+        android:button="@drawable/check_box"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/boarder"
+        android:drawablePadding="@dimen/_30sdp"
+        android:drawableLeft="@drawable/cash_icon"
         android:id="@+id/ch_cash"
         android:textSize="25sp"
         android:text="Cash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 </LinearLayout>

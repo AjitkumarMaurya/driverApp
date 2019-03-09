@@ -3,9 +3,11 @@ package com.userapp.driveroncall.Activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,47 +135,56 @@ public class DialogDateTimeFragment extends DialogFragment {
 
                 {
                     if (date.getTag().toString().equalsIgnoreCase("1")) {
+                        if (!time.getText().toString().trim().isEmpty()) {
 
-                        if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
-                            final Dialog dialog = new Dialog(getActivity());
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            dialog.setCancelable(false);
-                            dialog.setContentView(R.layout.popupxml);
+                            if (Common.oneOrTwoWay.equalsIgnoreCase("2")) {
+                                final Dialog dialog = new Dialog(getActivity());
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setCancelable(false);
+                                dialog.setContentView(R.layout.popupxml);
 
 
-                            TextView txt_inHours = dialog.findViewById(R.id.txt_inHours);
-                            TextView txt_inDays = dialog.findViewById(R.id.txt_inDays);
+                                TextView txt_inHours = dialog.findViewById(R.id.txt_inHours);
+                                TextView txt_inDays = dialog.findViewById(R.id.txt_inDays);
 
-                            txt_inDays.setOnClickListener(v2 -> {
+                                txt_inDays.setOnClickListener(v2 -> {
 
-                                txt_inDays.setBackgroundResource(R.drawable.boder_blue);
-                                txt_inHours.setBackgroundResource(R.drawable.boder_white);
+                                    txt_inDays.setBackgroundResource(R.drawable.boder_blue);
+                                    txt_inHours.setBackgroundResource(R.drawable.boder_white);
 
-                                Common.indayorhour = "1";
-                            });
-                            txt_inHours.setOnClickListener(v2 -> {
+                                    Common.indayorhour = "1";
+                                });
+                                txt_inHours.setOnClickListener(v2 -> {
 
-                                txt_inHours.setBackgroundResource(R.drawable.boder_blue);
-                                txt_inDays.setBackgroundResource(R.drawable.boder_white);
-                                Common.indayorhour = "2";
+                                    txt_inHours.setBackgroundResource(R.drawable.boder_blue);
+                                    txt_inDays.setBackgroundResource(R.drawable.boder_white);
+                                    Common.indayorhour = "2";
 
-                            });
+                                });
 
-                            Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-                            btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
-                            Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
-                            btn_ok.setOnClickListener(v15 -> {
-                                dialog.dismiss();
+                                Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+                                btn_cancel.setOnClickListener(v14 -> dialog.dismiss());
+                                Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+                                btn_ok.setOnClickListener(v15 -> {
+                                    dialog.dismiss();
+                                    startActivity(new Intent(getActivity(), EstimateCostActivity.class));
+
+                                });
+
+                                dialog.show();
+                            } else {
+                                dismiss();
                                 startActivity(new Intent(getActivity(), EstimateCostActivity.class));
 
-                            });
+                            }
 
-                            dialog.show();
-                        } else {
-                            dismiss();
-                            startActivity(new Intent(getActivity(), EstimateCostActivity.class));
+                        }else {
+
+                            Toast.makeText(getActivity(), "Select correct time.", Toast.LENGTH_SHORT).show();
 
                         }
+
+
                     }else {
 
                         Toast.makeText(getActivity(), "Select correct date.", Toast.LENGTH_SHORT).show();
@@ -217,12 +229,26 @@ public class DialogDateTimeFragment extends DialogFragment {
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                Toast.makeText(getActivity(), "" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
-                                time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                Log.e("@@","h---"+hourOfDay+"----"+minute);
 
-                                Common.time = String.format("%02d:%02d", hourOfDay, minute);
+                                if (hourOfDay<=6) {
 
-                                Log.e("@@",""+String.format("%02d:%02d", hourOfDay, minute));
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                                    builder1.setMessage("Sorry! Our driver are not available at that time, please select a time between 06:00 AM and 11:59 PM");
+                                    builder1.setCancelable(true);
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.getWindow().setGravity(Gravity.BOTTOM);
+                                    alert11.show();
+
+                                }else {
+                                    time.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                                    Common.time = String.format("%02d:%02d", hourOfDay, minute);
+
+                                    Log.e("@@", "" + String.format("%02d:%02d", hourOfDay, minute));
+                                }
+
 
 
                             }
@@ -248,12 +274,25 @@ public class DialogDateTimeFragment extends DialogFragment {
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                Toast.makeText(getActivity(), "" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
-                                time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                Log.e("@@","h---"+hourOfDay+"----"+minute);
 
-                                Common.time = String.format("%02d:%02d", hourOfDay, minute);
+                                if (hourOfDay<=6) {
 
-                                Log.e("@@",""+String.format("%02d:%02d", hourOfDay, minute));
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                                    builder1.setMessage("Sorry! Our driver are not available at that time, please select a time between 06:00 AM and 11:59 PM");
+                                    builder1.setCancelable(true);
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.getWindow().setGravity(Gravity.BOTTOM);
+                                    alert11.show();
+
+                                }else {
+                                    time.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                                    Common.time = String.format("%02d:%02d", hourOfDay, minute);
+
+                                    Log.e("@@", "" + String.format("%02d:%02d", hourOfDay, minute));
+                                }
 
 
                             }

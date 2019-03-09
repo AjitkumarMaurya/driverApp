@@ -291,6 +291,28 @@ public class EstimateCostActivity extends AppCompatActivity {
             }
         });
         //numAdepter();
+
+
+        if (preferenceManager.getPayType().equalsIgnoreCase("1")){
+
+            lin_cash.setBackgroundResource(R.drawable.boder_blue);
+
+            lin_online.setBackgroundResource(R.drawable.boder_white);
+            payType = "1";
+
+
+
+        }else if(preferenceManager.getPayType().equalsIgnoreCase("2")){
+
+            lin_online.setBackgroundResource(R.drawable.boder_blue);
+
+            lin_cash.setBackgroundResource(R.drawable.boder_white);
+
+            payType = "2";
+
+        }
+
+
     }
 
    /* private void numAdepter() {

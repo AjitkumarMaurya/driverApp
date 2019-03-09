@@ -51,6 +51,7 @@ import com.userapp.driveroncall.Activity.MyBookingActivity;
 import com.userapp.driveroncall.Activity.MyTripsActivity;
 import com.userapp.driveroncall.Activity.OneWayDateTimeActivity;
 import com.userapp.driveroncall.Activity.PasswordnavChangeActivity;
+import com.userapp.driveroncall.Activity.PaymentDefaultActivity;
 import com.userapp.driveroncall.Activity.PaymentsActivity;
 import com.userapp.driveroncall.Activity.ProfileActivity;
 import com.userapp.driveroncall.Activity.UserPrivacyPolicyActivity;
@@ -354,7 +355,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_payments) {
-            startActivity(new Intent(MainActivity.this, PaymentsActivity.class));
+            startActivity(new Intent(MainActivity.this, PaymentDefaultActivity.class));
 
         } else if (id == R.id.nav_MyTrips) {
 

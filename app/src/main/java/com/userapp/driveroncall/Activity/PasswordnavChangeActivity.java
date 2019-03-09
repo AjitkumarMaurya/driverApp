@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.userapp.driveroncall.MainActivity;
 import com.abc.driveroncall.R;
 import com.userapp.driveroncall.response.PasswordForgetResponse;
 import com.userapp.driveroncall.retrofit.ApiClient;
 import com.userapp.driveroncall.retrofit.ApiInterface;
+import com.userapp.driveroncall.utility.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,12 +34,18 @@ public class PasswordnavChangeActivity extends AppCompatActivity {
     ProgressDialog dialog;
     Boolean isPasswordSame = false;
 
+    PreferenceManager preferenceManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_forget);
         chePassword = findViewById(R.id.btn_SavePassword);
         dialog = new ProgressDialog(this);
+
+        preferenceManager = new PreferenceManager(this);
+
+        myid = preferenceManager.getRegisteredUserId();
 
         chePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +85,7 @@ public class PasswordnavChangeActivity extends AppCompatActivity {
                     }
 
                 }
-                SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
-                restoredText = prefs.getInt("userID", 0);
 
-                myid = Integer.toString(restoredText);
 
                 if (!TextUtils.isEmpty(old_Password) && !TextUtils.isEmpty(newPassword) && !TextUtils.isEmpty(confirm) && isPasswordSame) {
 
@@ -91,6 +96,8 @@ public class PasswordnavChangeActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }
@@ -111,10 +118,19 @@ public class PasswordnavChangeActivity extends AppCompatActivity {
                 if (response != null && response.isSuccessful()) {
                     dialog.dismiss();
                     if (!response.body().getUpdatePassword()) {
+
+                        tvError.setVisibility(View.VISIBLE);
                         tvError.setText( response.body().getErrors());
+
+
                         } else {
+
+                        Toast.makeText(PasswordnavChangeActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
+
                         startActivity(new Intent(PasswordnavChangeActivity.this, MainActivity.class));
+                        finish();
                     }
+
                 }
 
 

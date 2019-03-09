@@ -2,6 +2,7 @@ package com.userapp.driveroncall.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -24,15 +25,18 @@ public class PaymentDefaultActivity extends AppCompatActivity {
 
         preferenceManager = new PreferenceManager(this);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (preferenceManager.getPayType().equalsIgnoreCase("1")){
 
             ch_cash.setChecked(true);
+            ch_online.setChecked(false);
+
+
+        }else if(preferenceManager.getPayType().equalsIgnoreCase("2")){
+
             ch_online.setChecked(true);
-
-
-        }else if(preferenceManager.getPayType().equalsIgnoreCase("1")){
-
-            ch_online.setChecked(true);
+            ch_cash.setChecked(false);
 
         }
 
@@ -45,6 +49,7 @@ public class PaymentDefaultActivity extends AppCompatActivity {
 
                     preferenceManager.setPayType("1");
 
+                    ch_online.setChecked(false);
 
                 }
 
@@ -61,6 +66,7 @@ public class PaymentDefaultActivity extends AppCompatActivity {
                 if (isChecked){
 
                     preferenceManager.setPayType("2");
+                    ch_cash.setChecked(false);
 
 
 
@@ -68,5 +74,14 @@ public class PaymentDefaultActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

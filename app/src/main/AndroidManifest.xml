@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="com.userapp.driveroncall.Activity.PaymentDefaultActivity"></activity>
+        <activity android:name="com.userapp.driveroncall.Activity.PaymentDefaultActivity"
+            android:label="Default Payment"/>
         <activity
             android:name="com.userapp.driveroncall.Activity.MyBookingActivity"
             android:icon="@drawable/user_app_icon"
