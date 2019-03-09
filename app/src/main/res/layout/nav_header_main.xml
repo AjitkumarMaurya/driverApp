@@ -30,7 +30,7 @@
             android:id="@+id/imgeroun"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_70sdp"
-            android:background="@mipmap/ic_launcher"
+            android:background="@drawable/user_app_icon"
             tools:ignore="VectorDrawableCompat" />
 
         <LinearLayout

@@ -233,20 +233,24 @@ public class ProfileActivity extends AppCompatActivity {
 
                              if (response != null && response.isSuccessful()) {
 
-                                 edtFname.setText(""+response.body().getUserProfileUpDateModel().getUsersFirstName());
-                                 edtLname.setText(""+response.body().getUserProfileUpDateModel().getUsersLastName());
-                                 edtGmali.setText(""+response.body().getUserProfileUpDateModel().getUsersEmail());
-                                 edtAddress.setText(""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
-                                 edtBoD.setText(""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
-                                 edtPincode.setText(""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
+                                 try {
+                                     edtFname.setText(""+response.body().getUserProfileUpDateModel().getUsersFirstName());
+                                     edtLname.setText(""+response.body().getUserProfileUpDateModel().getUsersLastName());
+                                     edtGmali.setText(""+response.body().getUserProfileUpDateModel().getUsersEmail());
+                                     edtAddress.setText(""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
+                                     edtBoD.setText(""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
+                                     edtPincode.setText(""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
 
 
-                                 preferenceManager.setKeyValueString("firstName",""+response.body().getUserProfileUpDateModel().getUsersFirstName());
-                                 preferenceManager.setKeyValueString("lastName",""+response.body().getUserProfileUpDateModel().getUsersLastName());
-                                 preferenceManager.setKeyValueString("email",""+response.body().getUserProfileUpDateModel().getUsersEmail());
-                                 preferenceManager.setKeyValueString("uAddress",""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
-                                 preferenceManager.setKeyValueString("uBdate",""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
-                                 preferenceManager.setKeyValueString("uPinCode",""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
+                                     preferenceManager.setKeyValueString("firstName",""+response.body().getUserProfileUpDateModel().getUsersFirstName());
+                                     preferenceManager.setKeyValueString("lastName",""+response.body().getUserProfileUpDateModel().getUsersLastName());
+                                     preferenceManager.setKeyValueString("email",""+response.body().getUserProfileUpDateModel().getUsersEmail());
+                                     preferenceManager.setKeyValueString("uAddress",""+response.body().getUserProfileUpDateModel().getUsersAddress().toString());
+                                     preferenceManager.setKeyValueString("uBdate",""+response.body().getUserProfileUpDateModel().getUsersBirthDate().toString());
+                                     preferenceManager.setKeyValueString("uPinCode",""+response.body().getUserProfileUpDateModel().getUsersPincode().toString());
+                                 } catch (Exception e) {
+                                     e.printStackTrace();
+                                 }
 
                              }
                          }

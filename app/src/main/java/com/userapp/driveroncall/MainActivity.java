@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -148,6 +149,31 @@ public class MainActivity extends AppCompatActivity
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+            if (bundle.getString("from").equalsIgnoreCase("2")){
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("We will get you a driver 45 minutes before your scheduled time");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+        }
 
         initCode();
 
@@ -487,7 +513,7 @@ public class MainActivity extends AppCompatActivity
             fetchURL.execute(url);
 
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 9f));
 
 
         } else if (destination == null && Current_loc == null) {

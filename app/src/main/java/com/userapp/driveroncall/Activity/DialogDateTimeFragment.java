@@ -145,16 +145,15 @@ public class DialogDateTimeFragment extends DialogFragment {
 
                             txt_inDays.setOnClickListener(v2 -> {
 
-                                txt_inDays.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                                txt_inHours.setBackgroundColor(getResources().getColor(R.color.white));
+                                txt_inDays.setBackgroundResource(R.drawable.boder_blue);
+                                txt_inHours.setBackgroundResource(R.drawable.boder_white);
 
                                 Common.indayorhour = "1";
                             });
                             txt_inHours.setOnClickListener(v2 -> {
 
-                                txt_inHours.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                                txt_inDays.setBackgroundColor(getResources().getColor(R.color.white));
-
+                                txt_inHours.setBackgroundResource(R.drawable.boder_blue);
+                                txt_inDays.setBackgroundResource(R.drawable.boder_white);
                                 Common.indayorhour = "2";
 
                             });
@@ -201,6 +200,13 @@ public class DialogDateTimeFragment extends DialogFragment {
 
                 mHour = c.get(Calendar.HOUR_OF_DAY);
                 mMinute = c.get(Calendar.MINUTE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // API 21
+                    time.setShowSoftInputOnFocus(false);
+                } else { // API 11-20
+                    time.setTextIsSelectable(true);
+                }
+
 
                 new TimePickerDialog(getActivity(),
                         new TimePickerDialog.OnTimeSetListener() {

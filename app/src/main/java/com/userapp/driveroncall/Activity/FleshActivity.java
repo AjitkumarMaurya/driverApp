@@ -1,7 +1,14 @@
 package com.userapp.driveroncall.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,15 +38,70 @@ public class FleshActivity extends AppCompatActivity {
         setContentView(R.layout.activity_falesh);
         preferenceManager = new PreferenceManager(this);
 
-        // Create a Timer
-        Timer RunSplash = new Timer();
+        checkAppPermissions();
+    }
 
-        // Task to do when the timer ends
-        TimerTask ShowSplash = new TimerTask() {
+
+
+
+
+    public void checkAppPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_NETWORK_STATE)
+                        != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.INTERNET) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_NETWORK_STATE) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_COARSE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)) {
+                go_next();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{
+                                Manifest.permission.INTERNET,
+                                Manifest.permission.ACCESS_NETWORK_STATE,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                        },
+                        1);
+            }
+        } else {
+            go_next();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                checkAppPermissions();
+            } else {
+                checkAppPermissions();
+            }
+        }
+    }
+
+
+    private void go_next() {
+
+
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
                 if (preferenceManager.getLoginSession()) {
                     Intent myIntent = new Intent(FleshActivity.this, MainActivity.class);
                     startActivity(myIntent);
@@ -47,14 +109,8 @@ public class FleshActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(FleshActivity.this, OtpActivity.class);
                     startActivity(myIntent);
                 }
-
-
             }
-        };
-
-        // Start the timer
-        RunSplash.schedule(ShowSplash, Delay);
+        }, 2500);
     }
-
 
 }

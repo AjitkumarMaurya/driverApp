@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.userapp.driveroncall.Activity.OtpActivity">
@@ -25,7 +27,7 @@
             <ImageView
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
-                android:src="@drawable/logo" />
+                android:src="@drawable/user_app_icon" />
         </LinearLayout>
 
 
@@ -42,8 +44,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
 
             android:gravity="center"
             android:text="Please Enter Your Mobile Number So That We Can Verify "
@@ -51,6 +53,9 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -61,7 +66,6 @@
                 android:focusable="false"
                 android:hint="+91"
                 android:inputType="numberDecimal"
-                android:padding="@dimen/_4sdp"
                 android:singleLine="true"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
@@ -75,11 +79,9 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:hint=" Mobile No "
-
                 android:inputType="numberDecimal"
                 android:maxLength="10"
                 android:minEms="10"
-                android:padding="@dimen/_4sdp"
                 android:singleLine="true"
                 android:textSize="@dimen/_15sdp"
 
@@ -129,7 +131,7 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_2sdp"
+            android:layout_height="@dimen/_1sdp"
             android:layout_marginLeft="@dimen/_40sdp"
             android:layout_marginRight="@dimen/_40sdp"
             android:layout_marginBottom="@dimen/_10sdp"

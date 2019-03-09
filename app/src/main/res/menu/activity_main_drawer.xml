@@ -13,6 +13,7 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="My Bookings" />
         <item
+            android:visible="false"
             android:id="@+id/nav_MyTrips"
             android:icon="@drawable/ic_trips"
             android:title="My Trips" />

@@ -111,6 +111,21 @@ public class PreferenceManager {
         boolean getValue = mSharedPreferences.getBoolean(key, false);
         return getValue;
     }
+
+
+    public void setPayType(String key) {
+
+        mEditor.putString("payType", key).commit();
+
+    }
+
+    public String getPayType() {
+
+        String val = mSharedPreferences.getString("payType", "");
+        return val;
+    }
+
+
 }
 
 

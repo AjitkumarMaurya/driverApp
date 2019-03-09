@@ -29,7 +29,7 @@ public class OtpActivity extends AppCompatActivity {
     ProgressDialog dialog;
     String mobileNo;
     String mo;
-
+    TextView Tv_registereLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class OtpActivity extends AppCompatActivity {
         mobile = findViewById(R.id.edt_MobileOtp);
         button = findViewById(R.id.btn_SubmitOtp);
         registereLogin = findViewById(R.id.Tv_registereLogin);
-
+        Tv_registereLogin = findViewById(R.id.Tv_registereLogin);
 
         dialog = new ProgressDialog(this);
 
@@ -65,6 +65,13 @@ public class OtpActivity extends AppCompatActivity {
             }
         });
 
+        Tv_registereLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OtpActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
 
     }
 

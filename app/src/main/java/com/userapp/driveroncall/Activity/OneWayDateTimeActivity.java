@@ -75,8 +75,6 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
             dialogFragment.setCancelable(false);
             dialogFragment.show(ft, "paydialog");
 
-
-
         });
 
 
@@ -138,7 +136,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                     fetchURL.execute(url);
 
 
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 11f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 9f));
 
 
                 }

@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class EstimateCostActivity extends AppCompatActivity {
 
     TextView tv_type_select, tv_date_time;
-    TextView estimateAmount, place1, place2, estimateText;
+    TextView estimateAmount, estimateNote,place1, place2, estimateText;
     String hrBasedCost;
     ProgressDialog pdialog;
     Button btn_book;
@@ -64,6 +64,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Booking");
         tv_type_select = findViewById(R.id.tv_type_select);
         estimateAmount = findViewById(R.id.estimateAmount);
+        estimateNote  = findViewById(R.id.estimateNote);
         tv_date_time = findViewById(R.id.tv_date_time);
         place1 = findViewById(R.id.place1);
         place2 = findViewById(R.id.place2);
@@ -172,30 +173,18 @@ public class EstimateCostActivity extends AppCompatActivity {
         } else {
 
             list.add("1");
+            list.add("1.5");
             list.add("2");
+            list.add("2.5");
             list.add("3");
+            list.add("3.5");
             list.add("4");
+            list.add("4.5");
             list.add("5");
+            list.add("5.5");
             list.add("6");
+            list.add("6.5");
             list.add("7");
-            list.add("8");
-            list.add("9");
-            list.add("10");
-            list.add("11");
-            list.add("12");
-            list.add("13");
-            list.add("14");
-            list.add("15");
-            list.add("16");
-            list.add("17");
-            list.add("18");
-            list.add("19");
-            list.add("20");
-            list.add("21");
-            list.add("22");
-            list.add("23");
-            list.add("24");
-
 
             tv_type_select.setText("Hours");
 
@@ -235,7 +224,7 @@ public class EstimateCostActivity extends AppCompatActivity {
         btn_book.setOnClickListener(v -> {
 
                     if (totalPrice.equalsIgnoreCase("0")) {
-                        Toast.makeText(EstimateCostActivity.this, "Calculate trip faire..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EstimateCostActivity.this, "Calculate trip fair..", Toast.LENGTH_SHORT).show();
                     } else {
 
                         if (payType.equalsIgnoreCase("0")) {
@@ -283,9 +272,9 @@ public class EstimateCostActivity extends AppCompatActivity {
         lin_online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lin_online.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                lin_online.setBackgroundResource(R.drawable.boder_blue);
 
-                lin_cash.setBackgroundColor(getResources().getColor(R.color.white));
+                lin_cash.setBackgroundResource(R.drawable.boder_white);
 
                 payType = "2";
             }
@@ -294,10 +283,9 @@ public class EstimateCostActivity extends AppCompatActivity {
         lin_cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lin_cash.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                lin_cash.setBackgroundResource(R.drawable.boder_blue);
 
-                lin_online.setBackgroundColor(getResources().getColor(R.color.white));
-
+                lin_online.setBackgroundResource(R.drawable.boder_white);
                 payType = "1";
 
             }
@@ -342,7 +330,12 @@ public class EstimateCostActivity extends AppCompatActivity {
                 estimateAmount.setText(total + " Rs.");
                 estimateAmount.setVisibility(View.VISIBLE);
                 estimateText.setVisibility(View.VISIBLE);
+                estimateNote .setVisibility(View.VISIBLE);
 
+                float gst = Float.valueOf(response.body().getTripRate().getTripGstRate());
+                float cgst = Float.valueOf(response.body().getTripRate().getTripCgstRate());
+                int tax = (int) (gst+cgst);
+                estimateNote.setText("Tax apply "+tax+"%");
                 progressDialog.dismiss();
 
             }
@@ -377,7 +370,12 @@ public class EstimateCostActivity extends AppCompatActivity {
             public void onResponse(Call<CreateTripResponse> call, Response<CreateTripResponse> response) {
                 pdialog.dismiss();
                 Toast.makeText(EstimateCostActivity.this, "Create Trip SucessFull", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(EstimateCostActivity.this, MainActivity.class));
+                Intent intent = new Intent(EstimateCostActivity.this, MainActivity.class);
+
+                intent.putExtra("from","2");
+
+                startActivity(intent);
+
                 finish();
                 /*if (response.body().getCreateTrip()) {
 
