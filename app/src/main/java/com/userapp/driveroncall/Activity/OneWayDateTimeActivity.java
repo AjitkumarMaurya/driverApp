@@ -37,7 +37,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
     Marker dest, curr, my;
 
     Polyline line;
-    float red = 0, blue = 240;
+    float red = 0, blue = 240,green =120;
 
     SupportMapFragment mapFragment;
 
@@ -53,7 +53,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
         if (Common.oneOrTwoWay.equals("1")) {
             Objects.requireNonNull(getSupportActionBar()).setTitle("One Way");
         } else {
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Two Way");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Round trip");
         }
 
         place1 = findViewById(R.id.place1);
@@ -102,7 +102,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                             line.remove();
                         }
                     }
-                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(green)));
                     Log.e("deeee", "" + dest);
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
@@ -118,7 +118,7 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
                         }
 
                     }
-                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(red)));
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
 

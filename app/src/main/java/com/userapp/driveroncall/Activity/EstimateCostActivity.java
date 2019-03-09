@@ -357,7 +357,7 @@ public class EstimateCostActivity extends AppCompatActivity {
                 float gst = Float.valueOf(response.body().getTripRate().getTripGstRate());
                 float cgst = Float.valueOf(response.body().getTripRate().getTripCgstRate());
                 int tax = (int) (gst+cgst);
-                estimateNote.setText("Tax apply "+tax+"%");
+                estimateNote.setText("Tax apply "+tax+"%"+ " ");
                 progressDialog.dismiss();
 
             }

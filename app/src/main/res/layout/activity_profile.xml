@@ -144,6 +144,25 @@
                         android:maxLines="2"
                         android:minEms="1"
                         android:textSize="@dimen/_15sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile No" />
+
+                    <EditText
+                        android:id="@+id/edtPhone"
+                        android:layout_width="match_parent"
+                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_15sdp"
+
+                        tools:layout_editor_absoluteX="47dp"
+                        tools:layout_editor_absoluteY="92dp" />
+
+
 
                     <TextView
                         android:layout_width="wrap_content"

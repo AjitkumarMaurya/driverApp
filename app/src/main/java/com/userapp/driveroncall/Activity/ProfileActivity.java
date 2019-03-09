@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
-    EditText edtFname, edtLname, edtGmali, edtAddress, edtBoD, edtPincode;
+    EditText edtFname, edtLname, edtGmali, edtAddress, edtBoD, edtPincode,edtPhone;
     Button save;
     int restoredIDUser;
     int restoredText;
@@ -55,13 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
         edtBoD = findViewById(R.id.edtBobPro);
         edtPincode = findViewById(R.id.edtPincodePro);
         save = findViewById(R.id.btnSavePro);
-
+        edtPhone = findViewById(R.id.edtPhone);
 
         dialog = new ProgressDialog(this);
 
         myid = preferenceManager.getRegisteredUserId();
-
-
 
 
         edtFname.setText(""+preferenceManager.getKeyValueString("firstName"));
@@ -70,6 +68,10 @@ public class ProfileActivity extends AppCompatActivity {
         edtAddress.setText(""+preferenceManager.getKeyValueString("uAddress"));
         edtBoD.setText(""+preferenceManager.getKeyValueString("uBdate"));
         edtPincode.setText(""+preferenceManager.getKeyValueString("uPinCode"));
+
+        edtPhone.setEnabled(true);
+        edtPhone.setText(""+preferenceManager.getKeyValueString("mobileNumber"));
+        edtPhone.setEnabled(false);
 
 
 //get Data SharedPreferences

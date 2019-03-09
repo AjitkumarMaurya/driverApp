@@ -92,14 +92,7 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
 
             initCode();
 
-            btn_pay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    startPayment();
-
-                }
-            });
 
             iv_back.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,6 +133,12 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
 
                         tv_trip_no.setText("" + paymentInfoResponce.getPaymentDetails().getTripUniqueId());
 
+                        try {
+                            amount = Float.parseFloat(paymentInfoResponce.getPaymentDetails().getTripAmount());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         tv_amount_trip.setText("" + paymentInfoResponce.getPaymentDetails().getTripAmount());
                         trip_hours.setText("" + paymentInfoResponce.getPaymentDetails().getTripUsage());
                         tv_start_trip_time.setText("" + paymentInfoResponce.getPaymentDetails().getTripStartTime());
@@ -166,6 +165,15 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
 
                         tv_trip_amount_grand.setText("" + paymentInfoResponce.getPaymentDetails().getTripAmount());
 
+                        btn_pay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                startPayment();
+
+                            }
+                        });
+
                     }
 
                 }
@@ -190,6 +198,9 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
          */
 
         amount = amount * 100;
+
+        Log.e("@@","payamount"+amount);
+
 
         final Activity activity = this;
 
