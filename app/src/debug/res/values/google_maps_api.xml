@@ -24,11 +24,10 @@
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyARrFBZW7To3NFcPrL9VXjh-ZoHV7YDXaA</string>
 
-  <!--  <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDDZFHec3q4yKJjeC_sZEqQPwFJK5g5gyc</string>
+<!--
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDwK-ORX0CkDwYAqd6DRVbbnDkkYnd5hJQ</string>
+
 -->
 
-
-    <!--old key -->
-   <!-- <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBmhzTw48nG6pZDiOhmpVSHI9n3ziZtZWM</string>
--->
 </resources>

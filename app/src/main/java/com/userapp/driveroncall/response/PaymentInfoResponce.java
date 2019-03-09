@@ -132,10 +132,10 @@ public class PaymentInfoResponce {
         private String updatedAt;
         @SerializedName("gst_charge")
         @Expose
-        private String gstCharge;
+        private Object gstCharge;
         @SerializedName("cgst_charge")
         @Expose
-        private String cgstCharge;
+        private Object cgstCharge;
         @SerializedName("trip_accommodation_charges")
         @Expose
         private String tripAccommodationCharges;
@@ -442,19 +442,19 @@ public class PaymentInfoResponce {
             this.updatedAt = updatedAt;
         }
 
-        public String getGstCharge() {
+        public Object getGstCharge() {
             return gstCharge;
         }
 
-        public void setGstCharge(String gstCharge) {
+        public void setGstCharge(Object gstCharge) {
             this.gstCharge = gstCharge;
         }
 
-        public String getCgstCharge() {
+        public Object getCgstCharge() {
             return cgstCharge;
         }
 
-        public void setCgstCharge(String cgstCharge) {
+        public void setCgstCharge(Object cgstCharge) {
             this.cgstCharge = cgstCharge;
         }
 
