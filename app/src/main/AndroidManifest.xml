@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <activity android:name="com.userapp.driveroncall.Activity.PaymentDefaultActivity"
             android:label="Default Payment"/>
         <activity

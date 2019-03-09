@@ -22,7 +22,11 @@
     <string name="paytm">Paytm</string>
     <string name="mobikwik">mobikwik</string>
     <string name="cash">Cash</string>
+<!--
+debug
     <string name="razor_api">rzp_test_wQTaSU3pyP9wim</string>
+-->
+    <string name="razor_api">rzp_live_Efz6tuuYtHrixL</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

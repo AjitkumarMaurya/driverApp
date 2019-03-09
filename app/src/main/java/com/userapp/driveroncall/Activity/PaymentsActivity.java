@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class PaymentsActivity extends AppCompatActivity implements PaymentResultListener {
 
     String tripId;
-    float amount;
+    Float amount;
     PreferenceManager preferenceManager;
     Button btn_pay;
 
@@ -135,6 +135,8 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
 
                         try {
                             amount = Float.parseFloat(paymentInfoResponce.getPaymentDetails().getTripAmount());
+                            amount = amount * 100;
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -197,7 +199,6 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
           You need to pass current activity in order to let Razorpay create CheckoutActivity
          */
 
-        amount = amount * 100;
 
         Log.e("@@","payamount"+amount);
 
@@ -283,6 +284,8 @@ public class PaymentsActivity extends AppCompatActivity implements PaymentResult
 
                 @Override
                 public void onFailure(Call<CompleteTripResponce> call, Throwable t) {
+
+                    Toast.makeText(PaymentsActivity.this, ""+t.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
             });
