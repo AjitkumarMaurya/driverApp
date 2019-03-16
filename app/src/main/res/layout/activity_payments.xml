@@ -109,6 +109,7 @@
                 android:text="" />
 
             <TextView
+                android:drawableLeft="@drawable/ic_green_24dp"
                 android:id="@+id/tv_start_trip_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,6 +130,7 @@
                 android:text="" />
 
             <TextView
+                android:drawableLeft="@drawable/ic_red_24dp"
                 android:id="@+id/tv_end_trip_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

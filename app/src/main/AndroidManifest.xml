@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.abc.driveroncall">
+    package="com.docuser.driveroncall">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -20,46 +20,46 @@
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
-        <activity android:name="com.userapp.driveroncall.Activity.PaymentDefaultActivity"
+        <activity android:name="com.docuser.driveroncall.Activity.PaymentDefaultActivity"
             android:label="Default Payment"/>
         <activity
-            android:name="com.userapp.driveroncall.Activity.MyBookingActivity"
+            android:name="com.docuser.driveroncall.Activity.MyBookingActivity"
             android:icon="@drawable/user_app_icon"
             android:label="My Booking"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.COngratulationScreen"
+            android:name="com.docuser.driveroncall.Activity.COngratulationScreen"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.EstimateCostActivity"
+            android:name="com.docuser.driveroncall.Activity.EstimateCostActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.userapp.driveroncall.MainActivity"
+            android:name="com.docuser.driveroncall.MainActivity"
             android:icon="@drawable/user_app_icon"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.RegistrationActivity"
+            android:name="com.docuser.driveroncall.Activity.RegistrationActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.LoginActivity"
+            android:name="com.docuser.driveroncall.Activity.LoginActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.ProfileActivity"
+            android:name="com.docuser.driveroncall.Activity.ProfileActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Profile"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.FleshActivity"
+            android:name="com.docuser.driveroncall.Activity.FleshActivity"
             android:icon="@drawable/user_app_icon"
             android:noHistory="true"
             android:screenOrientation="portrait"
@@ -71,30 +71,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.userapp.driveroncall.Activity.VarificationOtpActivity"
+            android:name="com.docuser.driveroncall.Activity.VarificationOtpActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.PasswordnavChangeActivity"
+            android:name="com.docuser.driveroncall.Activity.PasswordnavChangeActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Password"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.OtpActivity"
+            android:name="com.docuser.driveroncall.Activity.OtpActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Register"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.VerifyOtpActivity"
+            android:name="com.docuser.driveroncall.Activity.VerifyOtpActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Change your password Intent intent = new Intent(context, MapsActivity.class); "
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <!--
@@ -107,74 +107,74 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key2" />
 
         <activity
-            android:name="com.userapp.driveroncall.Activity.map.MapsActivity"
+            android:name="com.docuser.driveroncall.Activity.map.MapsActivity"
             android:icon="@drawable/user_app_icon"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.AboutActivity"
+            android:name="com.docuser.driveroncall.Activity.AboutActivity"
             android:icon="@drawable/user_app_icon"
             android:label="About Us "
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.ContactUsActivity"
+            android:name="com.docuser.driveroncall.Activity.ContactUsActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Contact Us"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.UserPrivacyPolicyActivity"
+            android:name="com.docuser.driveroncall.Activity.UserPrivacyPolicyActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Privacy Policy"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.MyTripsActivity"
+            android:name="com.docuser.driveroncall.Activity.MyTripsActivity"
             android:icon="@drawable/user_app_icon"
             android:label="My Trips"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.Forget_Password.ForgetMobileNoActivity"
+            android:name="com.docuser.driveroncall.Activity.Forget_Password.ForgetMobileNoActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Forget Password"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.Forget_Password.ForgotOtpActivity"
+            android:name="com.docuser.driveroncall.Activity.Forget_Password.ForgotOtpActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Forget Password"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.Forget_Password.PasswordUpdateActivity"
+            android:name="com.docuser.driveroncall.Activity.Forget_Password.PasswordUpdateActivity"
             android:icon="@drawable/user_app_icon"
             android:label="Forget Password"
-            android:parentActivityName="com.userapp.driveroncall.MainActivity"
+            android:parentActivityName="com.docuser.driveroncall.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.OneWayDateTimeActivity"
+            android:name="com.docuser.driveroncall.Activity.OneWayDateTimeActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.TripDetailsActivity"
+            android:name="com.docuser.driveroncall.Activity.TripDetailsActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.userapp.driveroncall.Activity.PaymentsActivity"
+            android:name="com.docuser.driveroncall.Activity.PaymentsActivity"
             android:icon="@drawable/user_app_icon"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

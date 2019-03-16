@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:840625968358:android:954b3e7b2a40cdc3",
+        "mobilesdk_app_id": "1:840625968358:android:57f4daae5bfed367",
         "android_client_info": {
-          "package_name": "com.userapp.driveroncall"
+          "package_name": "com.docuser.driveroncall"
         }
       },
       "oauth_client": [
         {
-          "client_id": "840625968358-9gehbtjbdm17vc611vh6qvdferonr55u.apps.googleusercontent.com",
+          "client_id": "840625968358-9tuamovko8qbhb163j29dea2did5ujmk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.userapp.driveroncall",
+            "package_name": "com.docuser.driveroncall",
             "certificate_hash": "80ac706031bec4bd6db8c30524f12b0418d0a5fb"
           }
         },

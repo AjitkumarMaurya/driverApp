@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/user_register_bg"
     android:orientation="vertical"
-    tools:context="com.userapp.driveroncall.Activity.RegistrationActivity">
+    tools:context="com.docuser.driveroncall.Activity.RegistrationActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
