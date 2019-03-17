@@ -14,6 +14,9 @@ public class Common {
     public static Double wayLongitude = 0.0;
     public static LatLng myLatLong = null;
     public static LatLng myLatLong2 = null;
+
+    public static String distanceKM = "";
+
     public static String date = "";
     public static String time = "";
     public static String oneOrTwoWay = "";

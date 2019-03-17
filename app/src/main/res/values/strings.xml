@@ -31,4 +31,11 @@ debug
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_key2">AIzaSyARrFBZW7To3NFcPrL9VXjh-ZoHV7YDXaA</string>
+
+<!--
+    <string name="google_maps_key2">AIzaSyDDZFHec3q4yKJjeC_sZEqQPwFJK5g5gyc</string>
+-->
+
+
+
 </resources>

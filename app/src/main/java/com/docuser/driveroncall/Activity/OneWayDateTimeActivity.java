@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.docuser.driveroncall.FetchURL;
 import com.docuser.driveroncall.R;
@@ -60,6 +61,8 @@ public class OneWayDateTimeActivity extends AppCompatActivity implements OnMapRe
         place2 = findViewById(R.id.place2);
         place1.setText(Common.placeName1);
         place2.setText(Common.placeName2);
+
+        Toast.makeText(this, "KM   "+Common.distanceKM, Toast.LENGTH_SHORT).show();
 
         btnTimeDate.setOnClickListener(v -> {
 

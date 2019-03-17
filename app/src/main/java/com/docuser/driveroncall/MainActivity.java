@@ -44,7 +44,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.docuser.driveroncall.Activity.AboutActivity;
 import com.docuser.driveroncall.Activity.ContactUsActivity;
 import com.docuser.driveroncall.Activity.LoginActivity;
@@ -63,10 +62,10 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -80,6 +79,7 @@ import com.google.android.gms.maps.model.Polyline;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -101,8 +101,6 @@ public class MainActivity extends AppCompatActivity
     CardView myCard;
     LatLng destination, Current_loc;
     TextView current, desti;
-    double[] lat = {13.0827, 17.3850, 19.0760};
-    double[] lng = {80.2707, 78.4867, 72.8777};
     LinearLayout destin;
     float red = 0, blue = 240;
     private MarkerOptions place1, place2;
@@ -215,8 +213,45 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.google_maps_key2));
+        }
+        AutocompleteSupportFragment autocompleteFragment_to = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment_to.setHint("Where to Go");
+        autocompleteFragment_to.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG));
+        autocompleteFragment_to.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                Log.e("success", "" + place);
+                Toast.makeText(getApplicationContext(), place.getName(), Toast.LENGTH_SHORT).show();
+                destination = place.getLatLng();
 
-        PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
+                Common.myLatLong = destination;
+
+                Common.placeName1 = place.getAddress();
+
+                Common.placeName1City = getAddress(context, destination.latitude, destination.longitude);
+
+                if (mMap != null) {
+                    mMap.clear();
+
+                }
+
+                //desti.setText(place.getName());
+                //destin.setVisibility(View.VISIBLE);
+                // place2 = new MarkerOptions().position(destination).title("Place 2");
+                mapFragment.getMapAsync(MainActivity.this);
+
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Toast.makeText(context, "try again later", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         ((EditText) places.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(12.0f);
         places.setHint("Pickup Point ");
@@ -255,8 +290,46 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+*/
 
-        PlaceAutocompleteFragment places_current = (PlaceAutocompleteFragment)
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.google_maps_key2));
+        }
+        AutocompleteSupportFragment autocompleteFragment_from = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_current);
+        autocompleteFragment_from.setHint("Your Location");
+        autocompleteFragment_from.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG));
+        autocompleteFragment_from.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place_c) {
+                Log.e("success", "" + place_c);
+                Current_loc = place_c.getLatLng();
+
+                Common.myLatLong2 = Current_loc;
+
+                Common.placeName2City = getAddress(context, Current_loc.latitude, Current_loc.longitude);
+
+                Common.placeName2 = place_c.getAddress();
+
+                if (mMap != null) {
+                    mMap.clear();
+
+                }
+
+                mapFragment.getMapAsync(MainActivity.this);
+                Toast.makeText(getApplicationContext(), place_c.getName(), Toast.LENGTH_SHORT).show();
+                // place1 = new MarkerOptions().position(Current_loc).title("Place 1");
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Log.e("ddd", "" + status);
+                Log.e("ddd", "" + "@string/google_maps_key");
+            }
+        });
+
+
+       /* PlaceAutocompleteFragment places_current = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_current);
         ((EditText) places_current.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(12.0f);
         places_current.setHint("Destination ");
@@ -286,7 +359,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -307,17 +380,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void initPlacePicker() {
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-        try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -464,6 +527,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLocationChanged(Location location) {
+
         double lat = (location.getLatitude());
         double lng = (location.getLongitude());
         Log.e("mylocation", "" + lat + lng);
@@ -472,65 +536,8 @@ public class MainActivity extends AppCompatActivity
         LatLng sydney = new LatLng(lat, lng);
         // LatLng sydney = new LatLng(wayLatitude,wayLongitude);
         //red source blue destination
-        if (destination != null) {
-            if (dest != null) {
-                dest.remove();
-                if (line != null) {
-                    line.remove();
-                }
-            }
-            dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
-            Log.e("deeee", "" + dest);
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
-
-
-        }
-        if (Current_loc != null) {
-            if (curr != null) {
-                Log.e("blankkk", "" + curr);
-                curr.remove();
-                if (line != null) {
-                    line.remove();
-                }
-
-            }
-            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
-
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
-
-        }
-
-        if (destination != null && Current_loc != null) {
-
-
-            if (my != null) {
-                Log.e("blankkk", " 11111      " + curr);
-                my.remove();
-
-            }
-
-           /* line = mMap.addPolyline(new PolylineOptions().geodesic(true)
-                    .add(Current_loc, destination).width(10).color(Color.BLACK));*/
-            String url = getUrl(destination, Current_loc, "driving");
-
-            Log.e("url", " 11111      " + url);
-
-
-            dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
-            Log.e("deeee", "" + dest);
-            curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
-
-
-            FetchURL fetchURL = new FetchURL(this, mMap);
-
-            fetchURL.execute(url);
-
-
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 9f));
-
-
-        } else if (destination == null && Current_loc == null) {
+        if (destination == null && Current_loc == null) {
 
             if (my != null) {
                 Log.e("blankkk", " 11111      " + curr);
@@ -541,7 +548,6 @@ public class MainActivity extends AppCompatActivity
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15f));
 
         }
-
 
     }
 
@@ -606,6 +612,7 @@ public class MainActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         Double xlat, xlong;
         new Handler().postDelayed(new Runnable() {
+            @SuppressLint("MissingPermission")
             @Override
             public void run() {
 
@@ -613,10 +620,77 @@ public class MainActivity extends AppCompatActivity
                 mMap = googleMap;
 
                 buildGoogleApiClient();
-                //   mMap.setMyLocationEnabled(true);
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                mMap.getUiSettings().setAllGesturesEnabled(true);
 
 
-                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+
+                if (destination != null) {
+                    if (dest != null) {
+                        dest.remove();
+                        if (line != null) {
+                            line.remove();
+                        }
+                    }
+                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+                    Log.e("deeee", "" + dest);
+
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15f));
+
+
+                }
+                if (Current_loc != null) {
+                    if (curr != null) {
+                        Log.e("blankkk", "" + curr);
+                        curr.remove();
+                        if (line != null) {
+                            line.remove();
+                        }
+
+                    }
+                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Current_loc, 15f));
+
+                }
+
+                if (destination != null && Current_loc != null) {
+
+
+                    if (my != null) {
+                        Log.e("blankkk", " 11111      " + curr);
+                        my.remove();
+
+                    }
+
+           /* line = mMap.addPolyline(new PolylineOptions().geodesic(true)
+                    .add(Current_loc, destination).width(10).color(Color.BLACK));*/
+                    String url = getUrl(destination, Current_loc, "driving");
+
+                    Log.e("url", " 11111      " + url);
+
+
+                    dest = mMap.addMarker(new MarkerOptions().position(destination).title("" + Common.placeName1).icon(BitmapDescriptorFactory.defaultMarker(red)));
+                    Log.e("deeee", "" + dest);
+                    curr = mMap.addMarker(new MarkerOptions().position(Current_loc).title("" + Common.placeName2).icon(BitmapDescriptorFactory.defaultMarker(blue)));
+
+
+                    FetchURL fetchURL = new FetchURL(MainActivity.this, mMap);
+
+                    fetchURL.execute(url);
+
+
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 9f));
+
+
+                }
+
+
+
+
+
 
             }
         }, 1000);
@@ -626,8 +700,6 @@ public class MainActivity extends AppCompatActivity
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();

@@ -3,8 +3,13 @@ package com.docuser.driveroncall;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.docuser.driveroncall.common.Common;
 import com.google.android.gms.maps.GoogleMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,6 +69,39 @@ public class FetchURL extends AsyncTask<String, Void, String> {
                 sb.append(line);
             }
             data = sb.toString();
+
+
+            JSONObject jsonObject = new JSONObject();
+            try {
+
+                jsonObject = new JSONObject(sb.toString());
+
+                JSONArray routes = jsonObject.getJSONArray("routes");
+
+                JSONObject routes1 = routes.getJSONObject(0);
+
+                JSONArray legs = routes1.getJSONArray("legs");
+
+                JSONObject legs1 = legs.getJSONObject(0);
+
+                JSONObject distance = legs1.getJSONObject("distance");
+
+                JSONObject duration = legs1.getJSONObject("duration");
+
+                ;
+
+                Log.e("Distance", "km  "+distance.getString("text")+"time "+duration.getString("text"));
+
+                String[] datastr = distance.getString("text").split(" ", 2);
+
+                Common.distanceKM=datastr[0];
+
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
             Log.d("mylog", "Downloaded URL: " + data);
             br.close();
         } catch (Exception e) {
