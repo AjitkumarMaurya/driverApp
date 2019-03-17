@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity
 
                 Common.myLatLong = destination;
 
-                Common.placeName1 = place.getAddress();
+                Common.placeName1 = place.getName();
 
                 Common.placeName1City = getAddress(context, destination.latitude, destination.longitude);
 
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity
 
                 Common.placeName2City = getAddress(context, Current_loc.latitude, Current_loc.longitude);
 
-                Common.placeName2 = place_c.getAddress();
+                Common.placeName2 = place_c.getName();
 
                 if (mMap != null) {
                     mMap.clear();
@@ -580,12 +580,18 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void getAddress(double lat, double lng) {
+    public String getAddress(double lat, double lng) {
         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+        List<Address> addresses = null;
         try {
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-            Address obj = addresses.get(0);
-            String add = obj.getAddressLine(0);
+            addresses = geocoder.getFromLocation(lat, lng, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Address obj = addresses.get(0);
+        String add = obj.getAddressLine(0);
+
+        try {
             add = add + "\n" + obj.getCountryName();
             add = add + "\n" + obj.getCountryCode();
             add = add + "\n" + obj.getAdminArea();
@@ -600,11 +606,12 @@ public class MainActivity extends AppCompatActivity
             // Toast.LENGTH_SHORT).show();
 
             // TennisAppActivity.showDialog(add);
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        return add;
     }
 
 
